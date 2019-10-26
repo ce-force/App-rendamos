@@ -24,9 +24,9 @@ public class IntroActivity extends AppIntro {
             Intent intSignUp = new Intent(this, MainActivity.class);
             startActivity(intSignUp);
         }
-        addSlide(AppIntroFragment.newInstance("First page","This is the First Page Description",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("Second page","This is the Second Page Description",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("Third page","This is the Third Page Description",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance("","Paso 1. Inicio de sesión",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance("","Paso 2.",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance("","Paso 3",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
     }
 
     @Override
