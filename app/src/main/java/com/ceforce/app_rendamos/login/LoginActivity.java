@@ -33,13 +33,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) {
-        if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Llene todos los campos.", Toast.LENGTH_LONG).show();
+        if (SaveSharedPreference.IsLoged(this)){
+            Toast.makeText(this, "Previamente logeado", Toast.LENGTH_LONG).show();
+            //LOEGEAR
         }
-        if(id.getText().toString().length() < 9 ){
-            Toast.makeText(this, "Su id debe tener longitud igual a 9.", Toast.LENGTH_LONG).show();
+        else{
+            if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
+                Toast.makeText(this, "Llene todos los campos.", Toast.LENGTH_LONG).show();
+            }
+            else if(id.getText().toString().length() < 9 ){
+                Toast.makeText(this, "Su id debe tener longitud igual a 9.", Toast.LENGTH_LONG).show();
+            }
+            else {
+                SaveSharedPreference.setPassword(this,password.getText().toString());
+                SaveSharedPreference.setDNI(this,id.getText().toString());
+            }
+        }
+        }
 
-        }
     }
-
-}
+    
