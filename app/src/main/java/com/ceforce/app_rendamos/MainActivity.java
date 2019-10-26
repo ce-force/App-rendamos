@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
 
 
-                    userExists = userRequest("1111", "Te$t1234");
+                    userExists = logManager.userRequest("1211", "Te$t1234");
 
                     Log.v("Exists: ", userExists.toString());
 
@@ -56,22 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean userRequest(String user, String pass) throws IOException {
-
-        answer = logManager.getUserData(user, pass);
-
-        if (answer != null){
-
-            return true;
-
-        }
-        else
-        {
-
-            return false;
-
-        }
 
 
-    }
 }
