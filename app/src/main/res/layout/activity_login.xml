@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".login.LoginActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/idInputField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
@@ -16,7 +16,7 @@
         android:layout_marginBottom="313dp"
         android:ems="10"
         android:hint="DNI (cédula)"
-        android:inputType="textFilter"
+        android:inputType="number"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="0.505" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/passwordInputField"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="85dp"
@@ -37,21 +37,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/idInputField"
         app:layout_constraintVertical_bias="0.245" />
 
     <Button
-        android:id="@+id/registerbtn"
+        android:id="@+id/loginButton"
         android:layout_width="135dp"
         android:layout_height="48dp"
         android:layout_marginStart="167dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="156dp"
+        android:onClick="validateInputFields"
         android:text="Iniciar Sesión"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.617"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordInputField" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -63,7 +64,7 @@
         android:layout_marginEnd="116dp"
         android:layout_marginRight="116dp"
         android:layout_marginBottom="33dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/idInputField"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
