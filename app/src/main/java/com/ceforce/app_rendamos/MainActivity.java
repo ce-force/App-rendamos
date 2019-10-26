@@ -1,8 +1,12 @@
 package com.ceforce.app_rendamos;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -11,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -57,5 +62,31 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void onExit(View view){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+// Add the buttons
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                SaveSharedPreference.CleanLogIn(getBaseContext());
+                Intent i= new Intent(getBaseContext(),IntroActivity.class);
+                startActivity(i);
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.setMessage("¿Seguro que desea cerrar sesión?")
+                .setTitle("Confirmar");
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
+
+
     }
 }
