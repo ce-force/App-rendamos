@@ -33,11 +33,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) {
-        if (SaveSharedPreference.IsLoged(this)){
-            Toast.makeText(this, "Previamente logeado", Toast.LENGTH_LONG).show();
-            //LOEGEAR
-        }
-        else{
             if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
                 Toast.makeText(this, "Llene todos los campos.", Toast.LENGTH_LONG).show();
             }
@@ -48,8 +43,8 @@ public class LoginActivity extends AppCompatActivity {
                 SaveSharedPreference.setPassword(this,password.getText().toString());
                 SaveSharedPreference.setDNI(this,id.getText().toString());
             }
-        }
+
         }
 
     }
-    
+
