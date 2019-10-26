@@ -39,6 +39,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) throws IOException {
+        Log.d("NETXD2",""
+                +logManager.userRequest(id.getText().toString(), password.getText().toString())
+                +id.getText().toString()
+                +password.getText().toString());
         if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(this, "Por favor, llene todos los campos.", Toast.LENGTH_SHORT).show();
         }
