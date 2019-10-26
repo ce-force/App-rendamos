@@ -35,6 +35,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) {
+                SaveSharedPreference.setPassword(this,password.getText().toString());
+                SaveSharedPreference.setDNI(this,id.getText().toString());
         boolean allFields = false;
         if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(this, "Llene todos los campos.", Toast.LENGTH_LONG).show();
@@ -55,4 +57,3 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-}
