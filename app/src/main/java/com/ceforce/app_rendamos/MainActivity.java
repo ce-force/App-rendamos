@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.ceforce.app_rendamos.login.LoginActivity;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.google.android.material.navigation.NavigationView;
 
@@ -70,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 SaveSharedPreference.CleanLogIn(getBaseContext());
-                Intent i= new Intent(getBaseContext(),IntroActivity.class);
+                Intent i= new Intent(getBaseContext(), LoginActivity.class);
                 startActivity(i);
             }
         });
