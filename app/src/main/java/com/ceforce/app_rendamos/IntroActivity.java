@@ -20,8 +20,9 @@ public class IntroActivity extends AppIntro {
         super.onCreate(savedInstanceState);
         //   setContentView(R.layout.activity_app_intro_activity);
         if (SaveSharedPreference.IsLoged(this)){
-            Toast.makeText(this, "Previamente logeado", Toast.LENGTH_LONG).show();
-            //LOGEAR
+            //Toast.makeText(this, "Previamente logeado", Toast.LENGTH_LONG).show();
+            Intent intSignUp = new Intent(this, MainActivity.class);
+            startActivity(intSignUp);
         }
         addSlide(AppIntroFragment.newInstance("First page","This is the First Page Description",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
         addSlide(AppIntroFragment.newInstance("Second page","This is the Second Page Description",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));

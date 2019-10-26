@@ -35,25 +35,23 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) {
-                SaveSharedPreference.setPassword(this,password.getText().toString());
-                SaveSharedPreference.setDNI(this,id.getText().toString());
-        boolean allFields = false;
         if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
-            Toast.makeText(this, "Llene todos los campos.", Toast.LENGTH_LONG).show();
-            allFields = true;
+            Toast.makeText(this, "Por favor, llene todos los campos.", Toast.LENGTH_SHORT).show();
         }
-        if(id.getText().toString().length() < 9 && !allFields){
-            Toast.makeText(this, "Su id debe tener longitud igual a 9.", Toast.LENGTH_LONG).show();
+        else if (id.getText().toString().length() < 9) {
+            Toast.makeText(this, "Su id debe tener longitud igual a 9.", Toast.LENGTH_SHORT).show();
         }
-        if(password.getText().toString().length() < 8 || password.getText().toString().length() > 10){
-            Toast.makeText(this, "Su constraseña debe tener mínimo mínimo 8 caracteres y máximo 10.", Toast.LENGTH_LONG).show();
-        }
-        else{
-
+        else if (password.getText().toString().length() < 8 || password.getText().toString().length() > 10) {
+            Toast.makeText(this, "Su constraseña debe tener mínimo mínimo 8 caracteres y máximo 10.", Toast.LENGTH_SHORT).show();
+        } else {
+            SaveSharedPreference.setPassword(this, password.getText().toString());
+            SaveSharedPreference.setDNI(this, id.getText().toString());
             Intent intSignUp = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intSignUp);
         }
 
 
     }
+
+}
 
