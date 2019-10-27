@@ -13,6 +13,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
@@ -134,6 +135,19 @@ public class ASQ3TestActivity extends AppCompatActivity {
         }
     }
 
+    boolean AllSelected(){
+        for (int i=0;i<5;i++){
+            for (int j=0;j<6;j++){
+                if (punt[i][j]==-1){
+                    Toast.makeText(this,"Falta llenar el espacio "+(j+1)+" en el área de "+Areas[i],Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
     void Results(){
         Results=new int[5];
         for (int i = 0;i < 5; i++){
@@ -204,6 +218,10 @@ public class ASQ3TestActivity extends AppCompatActivity {
 
     public void onConfirm(View view){
         Select();
+        if (!AllSelected()){
+            return;
+        }
+
         Results();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 // Add the buttons
