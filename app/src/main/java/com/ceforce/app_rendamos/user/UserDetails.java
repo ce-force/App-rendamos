@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.ceforce.app_rendamos.ASQ3TestActivity;
 import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
@@ -84,15 +85,11 @@ public class UserDetails extends AppCompatActivity {
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //Abrir ventana
-                    Log.d("R004", "init window");
-                    
+
+                    onApply(v);
+
                 }
             });
-
-
-
-
 
 
         } catch (JSONException e) {

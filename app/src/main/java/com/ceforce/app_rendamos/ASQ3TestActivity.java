@@ -12,7 +12,20 @@ import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
+import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.ui.DatePickerFragment;
+import com.ceforce.app_rendamos.user.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ASQ3TestActivity extends AppCompatActivity {
     TextView tv1;
@@ -43,7 +56,45 @@ public class ASQ3TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asq3_test);
 
+        int position = RecyclerViewAdapter.ind;
+
+        JSONObject LoginData = null;
+        JSONObject UserInfo = null;
+
+        String answer = SaveSharedPreference.getUserData(this);
+
+        JSONObject answerJSON = null;
+        try {
+            answerJSON = new JSONObject(answer);
+            UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+            LoginData = new JSONObject(answerJSON.getString("LoginData"));
+
+
+            com.ceforce.app_rendamos.LoginManager logManager = new com.ceforce.app_rendamos.LoginManager();
+            User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
+
+            String[][] matrix = logManager.give_my_kids(teacher.getAccess_token());
+
+            if(matrix == null){
+
+                Log.e("MatError", "Null mat");
+
+            }
+
+            Date c = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            String today = df.format(c);
+
+
+            String exam = new DateUtilities().getASQ(matrix[position][2], Integer.parseInt(matrix[position][3]));
+
+        TextView asqField = findViewById(R.id.textView2);
+
+        asqField.setText(exam);
+
+
         tv1=findViewById(R.id.textView);
+        tv1.setText(today);
         area=findViewById(R.id.Area);
         T=findViewById(R.id.table);
         R1=findViewById(R.id.Rgroup1);
@@ -60,6 +111,13 @@ public class ASQ3TestActivity extends AppCompatActivity {
             }
         }
         Refresh();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void show(){
