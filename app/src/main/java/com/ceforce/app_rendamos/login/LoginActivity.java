@@ -68,32 +68,29 @@ public class LoginActivity extends AppCompatActivity {
             Intent intSignUp = new Intent(LoginActivity.this, MainActivity.class);
 
 
-            JSONObject answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
-
-            JSONObject LoginData=new JSONObject(answer.getString("LoginData"));
-            JSONObject UserInfo=new JSONObject(answer.getString("UserInfo"));
-            teacher=new User(UserInfo.getInt("uid"),UserInfo.getString("givenName"),UserInfo.getString("email"),LoginData.getString("access_token"));
-            String[][] matrix=logManager.give_my_kids(teacher.access_token);
-            if(matrix==null){
-                Log.e("NO","NO TIENE KIDS ESTE MEN") ;
-            }
-            else{
-
-                for(int r=0;r<matrix.length; r++) {
-                    Log.e("id",matrix[r][0]);
-                    Log.e("Nombre",matrix[r][1]);
-                    Log.e("dob",matrix[r][2]);
-                    Log.e("earlyBirht",matrix[r][3]);
-
-                }
-
-
-
-
-
-                startActivity(intSignUp);
-
-
+//            JSONObject answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
+//
+//            JSONObject LoginData=new JSONObject(answer.getString("LoginData"));
+//            JSONObject UserInfo=new JSONObject(answer.getString("UserInfo"));
+//            teacher=new User(UserInfo.getInt("uid"),UserInfo.getString("givenName"),UserInfo.getString("email"),LoginData.getString("access_token"));
+//            String[][] matrix=logManager.give_my_kids(teacher.access_token);
+//            if(matrix==null){
+//                Log.e("NO","NO TIENE KIDS ESTE MEN") ;
+//            }
+//            else {
+//
+//                for (int r = 0; r < matrix.length; r++) {
+//                    Log.e("id", matrix[r][0]);
+//                    Log.e("Nombre", matrix[r][1]);
+//                    Log.e("dob", matrix[r][2]);
+//                    Log.e("earlyBirht", matrix[r][3]);
+//
+//                }
+//
+//
+//                startActivity(intSignUp);
+//
+//            }
         }
 
 
