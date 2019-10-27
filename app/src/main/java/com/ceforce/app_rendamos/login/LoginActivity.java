@@ -9,7 +9,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.ui.home.HomeFragment;
@@ -19,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -76,15 +76,13 @@ public class LoginActivity extends AppCompatActivity {
 
             }
 */
+        String access_token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlCQ0U2OTc1MDUzMkU3QjNEOUU3MkU4ODcwOTZENDk2RUEyNzdBOEIiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJtODVwZFFVeTU3UFo1eTZJY0piVWx1b25lb3MifQ.eyJuYmYiOjE1NzIyMDExMjQsImV4cCI6MTU3MjIwNDcyNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIvcmVzb3VyY2VzIiwiRGVodmlBUEkiXSwiY2xpZW50X2lkIjoiZGVodmlfYXBpIiwic3ViIjoiMSIsImF1dGhfdGltZSI6MTU3MjIwMTEyNCwiaWRwIjoibG9jYWwiLCJnaXZlbl9uYW1lIjoiWW9uYXRhbiBMZWl0b24iLCJlbWFpbCI6ImphcWxvdWkxQGdtYWlsLmNvbSIsInJvbGUiOiI1Iiwiem9uZWluZm8iOiIxIiwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlIiwiYXBpLnJlc291cmNlIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.JA5RyKidMZB9BC9ye-PLQJlZhJg_mNq0rGCg4gbqW2EKI39cvV5ep0EFxllQkvAMNp9vlSz76bRMJZkJqFtBLaucoBnq5vvejiBx3YFXyb4fIGVGIQ7Y2f7aiYen036hd7Bo1iPPeLr-fGwEu17VUJv2GVpdrgz8nsl1w7nx7PjEchEgrkq1Fdvh5FVtei-SGyBYwHakvwbN0ISkLBzZqpDdUVgdaZhBjimCMzLwLb4-ZqQ8i3S76z1oGtqbPtggUvuQ-uFo54VAKjBq2wtoETKHtPtMaCV8T5e6l6wBMA-8GQUxSljDG4n4-34uaghycbbHucqxPDbmOOIOPOTMug";
 
-         LoginManager manager = new LoginManager();
+        ArrayList<Integer> ints = new LoginManager().getGlobalScores(access_token, "11");
 
-         JSONObject attendance = manager.postAttendance("eyJhbGciOiJSUzI1NiIsImtpZCI6IjlCQ0U2OTc1MDUzMkU3QjNEOUU3MkU4ODcwOTZENDk2RUEyNzdBOEIiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJtODVwZFFVeTU3UFo1eTZJY0piVWx1b25lb3MifQ.eyJuYmYiOjE1NzIxNzkzNzQsImV4cCI6MTU3MjE4Mjk3NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIvcmVzb3VyY2VzIiwiRGVodmlBUEkiXSwiY2xpZW50X2lkIjoiZGVodmlfYXBpIiwic3ViIjoiMSIsImF1dGhfdGltZSI6MTU3MjE3OTM3NCwiaWRwIjoibG9jYWwiLCJnaXZlbl9uYW1lIjoiWW9uYXRhbiBMZWl0b24iLCJlbWFpbCI6ImphcWxvdWkxQGdtYWlsLmNvbSIsInJvbGUiOiI1Iiwiem9uZWluZm8iOiIxIiwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlIiwiYXBpLnJlc291cmNlIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.YnQYTdNEq1UksiqZu3F5fzgjA9nuVqITJ3W98Io2Kj7u2CRjz0rPqU7KS6HEgGWzeQCM6WyKtF-j0pHYmqKy0X1-bjER9djbhep-fgl53ZeF9HIslT-1RVTrzDXALtddaYbEApsJq_6zyQW2IDGrV-RsSneyE6_8xxCyn9meacI3b-CH168JqOBCTaaDTimYpDzvsdRi2GyADE7ByWhq2ePJhUxgpbyl8POHFmUB41a6Y5tNDOSnJyCmbzBr38_yvc__VF-U_YWxlAxU7TOjSbjXhYd8fjcWvWlF1Ebb5WMB5Pqaz8L56hTWHMf2xhTFACDTtLwyMDLqwbt0U0Q9eg",
-                 "2 Meses ASQ-3", 1, 1);
+        Log.d("FINALVALUES", ints.toString());
 
-         Log.d("ATTENDANCE", attendance.toString());
-
-        }
+    }
 
 
 }

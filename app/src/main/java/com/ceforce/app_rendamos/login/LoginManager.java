@@ -1,4 +1,4 @@
-package com.ceforce.app_rendamos;
+package com.ceforce.app_rendamos.login;
 
 import android.util.Log;
 import android.widget.Button;
@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,217 @@ public class LoginManager {
     private static final String[] respuesta = {""};
     JSONObject answer;
     JSONArray answerRequest;
+    String answerTest;
+
+    public String[][] getAttendanceStudent(String access_token, String idStudent) throws InterruptedException, JSONException, IOException {
+        JSONArray antendaces=this.getHttpResponse(" http://192.168.128.23:7321/ApiServer/api/Attendance/GetByStudentId?studentId="+idStudent,access_token);
+        String[][] matrix = new String[antendaces.length()][2];
+        for(int r=0;r<antendaces.length(); r++) {
+            JSONObject antendance=antendaces.getJSONObject(r);
+            matrix[r][0]= String.valueOf(antendance.getInt("id"));
+            matrix[r][1]= String.valueOf(antendance.getInt("formId"));
+        }
+        return matrix;
+
+    }
+
+
+    public ArrayList<Integer> getASQResults(String access_token, String idStudent){
+        ArrayList<Integer> indList = new ArrayList<>();
+        try {
+            String[][] matrix = getAttendanceStudent(access_token, idStudent);
+
+            for (int i = 0; i < matrix.length; i++) {
+                indList.add(Integer.parseInt(matrix[i][0]));
+            }
+
+            return indList;
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int manageAreaResults(JSONArray array){
+
+        int res = 0;
+
+        for (int i = 0; i < array.length(); i++) {
+
+            try {
+                int val = ((JSONObject) array.get(i)).getInt("value");
+
+                res += val;
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+        return res;
+    }
+
+    public ArrayList<Integer> manageResults(ArrayList<JSONObject> values){
+
+        int res1 = 0 , res2 = 0, res3 = 0, res4 = 0, res5 = 0, res6 = 0;
+
+        for (JSONObject obj:values) {
+
+            try {
+                JSONArray innerObject = (JSONArray) obj.get("resultList");
+
+                for (int i = 0; i < innerObject.length(); i++) {
+
+                    JSONObject resultList = (JSONObject) innerObject.get(i);
+
+                    JSONArray results = (JSONArray) resultList.get("results");
+                    int areaId = resultList.getInt("areaId");
+                    int holder = manageAreaResults(results);
+
+                    if(areaId == 1){
+                        res1+=holder;
+                    }
+                    else if (areaId == 2){
+
+                        res2+=holder;
+
+                    }
+                    else if (areaId == 3){
+
+                        res3+=holder;
+                    }
+                    else if (areaId == 4){
+
+                        res4+=holder;
+                    }
+                    else if (areaId == 5){
+
+                        res5+=holder;
+                    }
+                    else if (areaId == 6){
+
+                        res6+=holder;
+                    }
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+
+        ArrayList<Integer> ints = new ArrayList<>();
+
+        ints.add(res1);
+        ints.add(res2);
+        ints.add(res3);
+        ints.add(res4);
+        ints.add(res5);
+        ints.add(res6);
+
+
+        return ints;
+
+
+
+
+
+    }
+
+    public ArrayList<JSONObject> getResultsFromAttendance(String access_token, ArrayList<Integer> inds){
+
+        ArrayList<JSONObject> results = new ArrayList<>();
+
+        for (Integer ind:inds) {
+
+            String URL = "http://192.168.128.23:7321/ApiServer/api/Result/GetResultByAttendanceId?attendanceId=" + Integer.toString(ind);
+            try {
+                JSONObject jsonObject = getHttpResponseObject(URL, access_token);
+
+                results.add(jsonObject);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+
+        }
+
+        Log.d("RESULTS", results.toString());
+
+        return results;
+
+
+    }
+
+
+    public void postAddAttendance(JSONObject data,String token){
+
+        Log.d("POST_ATTENDANCE", "init");
+
+        MediaType MEDIA_TYPE = MediaType.parse("application/json");
+        String url = "http://192.168.128.23:7321/ApiServer/api/Attendance/AddAttendance";
+
+
+        OkHttpClient client = new OkHttpClient();
+
+        JSONObject postdata = data;
+
+        RequestBody body = RequestBody.create(MEDIA_TYPE, postdata.toString());
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization","Bearer "+token)
+
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                String mMessage = e.getMessage().toString();
+                Log.d("Failure Response", mMessage);
+
+                exists = false;
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                String mMessage = response.body().string();
+                Log.d("Exists! Response ", exists.toString());
+                try {
+                    answer = new JSONObject(mMessage);
+                    exists = true;
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
+
+    public ArrayList<Integer> getGlobalScores(String access_token, String studentId){
+
+        ArrayList<Integer> finalList = new LoginManager().getASQResults(access_token, studentId);
+
+        ArrayList<Integer> ints = new LoginManager().manageResults(new LoginManager().getResultsFromAttendance(access_token, finalList));
+
+        return ints;
+    }
 
     public JSONObject getUserData(String user, String pass){
 
@@ -104,6 +316,11 @@ public class LoginManager {
             attendance.put("status", "Finished");
             attendance.put("form", formObject);
 
+
+            Log.d("POST_ATTENDANCE", "Before");
+
+            postAddAttendance(attendance,access_token);
+
             return attendance;
         }
         catch (Exception e){
@@ -138,7 +355,7 @@ public class LoginManager {
     }
 
     public String [][] give_my_kids(String access_token) throws InterruptedException, JSONException, IOException {
-        JSONArray kids=this.getHttpResponse("http://192.168.128.23:7321/ApiServer/api/Student/GetMyStudents",access_token);
+        JSONArray kids=this.getHttpResponse("http://192.168.128.23:8141/ApiServer/api/Student/GetMyStudents",access_token);
         if(kids!=null){
             String[][] matrix = new String[kids.length()][4];
             Log.e("Size de kids",String.valueOf(kids.length()));
@@ -155,7 +372,7 @@ public class LoginManager {
 
     }
 
-    public JSONArray getHttpResponse(String urlEntry, String access_token) throws IOException, InterruptedException, JSONException {
+    public JSONArray getHttpResponse(String urlEntry, String access_token ) throws IOException, InterruptedException, JSONException {
 
 
         String url = urlEntry;

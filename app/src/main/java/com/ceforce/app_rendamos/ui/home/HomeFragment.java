@@ -16,10 +16,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.user.User;
 
