@@ -45,7 +45,7 @@ public class HistoricalResults extends AppCompatActivity {
 
     }
 
-    }
+
     public void toUserHistory(View view){
         Intent intent = new Intent(this, UserDetails.class);
         startActivity(intent);
