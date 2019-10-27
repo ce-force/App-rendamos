@@ -125,9 +125,9 @@ public class ASQ3TestActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Bundle b = this.getIntent().getExtras();
+        /*Bundle b = this.getIntent().getExtras();
         if(b!=null)
-            punt = b.getParcelable("Matrix");
+            punt = b.getParcelable("Matrix");*/
         Refresh();
 
 
