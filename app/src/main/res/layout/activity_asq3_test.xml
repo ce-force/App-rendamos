@@ -43,7 +43,7 @@
         android:layout_marginLeft="28dp" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/Area"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -61,7 +61,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26">
+        app:layout_constraintTop_toBottomOf="@+id/Area">
 
         <TableRow
             android:layout_width="match_parent"
@@ -370,43 +370,47 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="46dp"
+        android:layout_marginRight="46dp"
+        android:onClick="onNext"
         android:text="Next"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table"
-        android:layout_marginRight="46dp" />
+        app:layout_constraintTop_toBottomOf="@+id/table" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
+        android:layout_marginLeft="46dp"
         android:layout_marginTop="24dp"
-        android:text="Back"
+        android:onClick="onBack"
+        android:text="onBack"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/table"
-        android:layout_marginLeft="46dp" />
+        app:layout_constraintTop_toBottomOf="@+id/table" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
+        android:layout_marginLeft="46dp"
         android:layout_marginBottom="36dp"
+        android:onClick="onCancel"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginLeft="46dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="46dp"
+        android:layout_marginRight="46dp"
         android:layout_marginBottom="36dp"
+        android:onClick="onConfirm"
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="46dp" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
