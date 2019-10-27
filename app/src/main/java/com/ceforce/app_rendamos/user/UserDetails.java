@@ -119,9 +119,6 @@ public class UserDetails extends AppCompatActivity {
         Intent intent = new Intent(this, HistoryLog.class);
         intent.putExtra("ID",idText.getText());
         startActivity(intent);
-
-
-
     }
 
 
@@ -136,7 +133,7 @@ public class UserDetails extends AppCompatActivity {
 
 
         Intent intent = new Intent(this, HistoricalResults.class);
-        intent.putExtra("jsonReceive",UserInfo.getInt("uid"));
+//        intent.putExtra("jsonReceive",UserInfo.getInt("uid"));
         startActivity(intent);
 
 
