@@ -62,7 +62,17 @@ public class HomeFragment extends Fragment {
 
             if (matrix == null) {
                 Log.e("NO", "NO TIENE KIDS ESTE MEN");
+
+
+                TextView leftLabel = root.findViewById(R.id.anchorText);
+                leftLabel.setText("");
+                TextView rightLabel = root.findViewById(R.id.sideText);
+                rightLabel.setText("No hay alumnos para este profesor");
+
+
+
             } else {
+                matToRecyclerView(matrix, matrix.length, root);
 
                 for (int r = 0; r < matrix.length; r++) {
                     Log.e("id", matrix[r][0]);
@@ -73,7 +83,7 @@ public class HomeFragment extends Fragment {
                 }
             }
 
-            matToRecyclerView(matrix, matrix.length, root);
+
 
     //        final TextView textView = root.findViewById(R.id.text_home);
     ////        homeViewModel.getText().observe(this, new Observer<String>() {
@@ -92,7 +102,7 @@ public class HomeFragment extends Fragment {
 
 
     private void matToRecyclerView(String mat[][], int n, View root){
-        Log.d("Login >> Mat Load", "initRecyclerView: init Mat Load");
+        //Log.d("Login >> Mat Load", String.valueOf(n));
 
         ArrayList<String> leftText = new ArrayList<>();
         ArrayList<String> rightText = new ArrayList<>();
