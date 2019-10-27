@@ -1,5 +1,7 @@
 package com.ceforce.app_rendamos;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
@@ -10,11 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -32,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
     LoginManager logManager = new LoginManager();
     Boolean userExists = false;
     User teacher;
+
+    private ArrayList<String> leftText = new ArrayList<>();
+    private ArrayList<String> rightText = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    /*
                     answer=logManager.post_Login("1111", "Te$t1234");
                     //teacher=new User(answer.getInt(""))
 
@@ -79,18 +89,49 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("DATA",UserInfo.getString("givenName"));
 
                     //Log.v("Exists: ", userExists.toString());
+*/
 
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
+                String mat[][] = {{"Uno", "1"}, {"Dos", "2"}, {"Tres", "3"},{"Uno", "1"}, {"Dos", "2"}, {"Tres", "3"},{"Uno", "1"}, {"Dos", "2"}, {"Tres", "3"},{"Uno", "1"}, {"Dos", "2"}, {"Tres", "3"}};
+
+                matToRecyclerView(mat, 12);
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
     }
+
+    private void matToRecyclerView(String mat[][], int n){
+
+        ArrayList<String> leftText = new ArrayList<>();
+        ArrayList<String> rightText = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+
+            leftText.add(mat[i][0]);
+            rightText.add(mat[i][1]);
+
+        }
+
+        initRecyclerView(leftText, rightText);
+
+    }
+
+
+    private void initRecyclerView(ArrayList<String> leftTexts, ArrayList<String> rightTexts){
+        setContentView(R.layout.recycler_main);
+
+        Log.d(TAG, "initRecyclerView: init recyclerView");
+        RecyclerView recyclerView = findViewById(R.id.recycler);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, leftTexts, rightTexts);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+    }
+
 
 
 
