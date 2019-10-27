@@ -52,6 +52,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
     };
     int AreaActual=0;
     int[][] punt = new int[5][6];
+    int[] Results;
 
 
 
@@ -122,6 +123,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
     void show(){
@@ -132,8 +134,8 @@ public class ASQ3TestActivity extends AppCompatActivity {
         }
     }
 
-    int[] Results(){
-        int arr[]=new int[5];
+    void Results(){
+        Results=new int[5];
         for (int i = 0;i < 5; i++){
             int s=0;
             for (int j = 0;j < 6; j++){
@@ -141,10 +143,9 @@ public class ASQ3TestActivity extends AppCompatActivity {
                     s += punt[i][j];
                 }
             }
-            arr[i]=s;
+            Results[i]=s;
+            Log.d("Suma1",i+"-"+Results[i]);
         }
-
-        return arr;
     }
 
     void clean() {
@@ -189,6 +190,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
         show();
         AreaActual++;
         Refresh();
+        Results();
     }
 
     public void onBack(View view){
@@ -197,18 +199,19 @@ public class ASQ3TestActivity extends AppCompatActivity {
         show();
         AreaActual--;
         Refresh();
+        Results();
     }
 
     public void onConfirm(View view){
-        clean();
-        Refresh();
+        Select();
+        Results();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 // Add the buttons
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
                 Intent intent = new Intent(getBaseContext(), TestResults.class);
-                intent.putExtra("Results",Results());
+                intent.putExtra("Results",Results);
                 startActivity(intent);
                 
             }
@@ -223,12 +226,12 @@ public class ASQ3TestActivity extends AppCompatActivity {
     }
 
     public void onCancel(View view){
-        clean();
-        Refresh();
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 // Add the buttons
         builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                clean();
+                Refresh();
                 finish();
             }
         });
