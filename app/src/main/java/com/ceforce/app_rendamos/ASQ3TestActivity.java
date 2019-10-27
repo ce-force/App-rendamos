@@ -191,6 +191,9 @@ public class ASQ3TestActivity extends AppCompatActivity {
 // Add the buttons
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+
+                Intent intent = new Intent(getBaseContext(), TestResults.class);
+                startActivity(intent);
                 
             }
         });
@@ -200,6 +203,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
 
         dialog.show();
+
     }
 
     public void onCancel(View view){
