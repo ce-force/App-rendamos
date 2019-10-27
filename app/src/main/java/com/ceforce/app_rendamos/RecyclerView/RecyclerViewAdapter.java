@@ -2,6 +2,7 @@ package com.ceforce.app_rendamos.RecyclerView;
 
 import android.app.AppComponentFactory;
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,9 +14,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
+import com.ceforce.app_rendamos.user.UserDetails;
 
 import org.w3c.dom.Text;
 import java.lang.reflect.Array;
@@ -25,6 +29,8 @@ import java.util.ArrayList;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private static final String TAG = "RecyclerViewAdapter";
 
+    private Context context;
+
     private ArrayList<String> leftText;
     private ArrayList<String> rightText;
     private Context mContext;
@@ -33,6 +39,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         this.leftText = leftText;
         this.rightText = rightText;
         this.mContext = mContext;
+        this.context = context;
     }
 
     @NonNull
@@ -55,12 +62,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-                //setContentView(R.layout.settings_fragment);
+//                context.startActivity(new Intent(context, UserDetails.class));
+
+                Intent intent = new Intent(v.getContext(), UserDetails.class);
+                v.getContext().startActivity(intent);
 
 
             }
         });
     }
+
 
     @Override
     public int getItemCount() {
