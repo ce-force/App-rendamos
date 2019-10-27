@@ -25,7 +25,6 @@ public class LoginManager {
     private static final String TAG = "Response";
     Button loadApi, postReq;
     private static final String[] respuesta = {""};
-    JSONObject answer;
     JSONArray answerRequest;
 
 
