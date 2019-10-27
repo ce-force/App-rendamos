@@ -29,6 +29,8 @@ import java.util.Date;
 
 public class UserDetails extends AppCompatActivity {
 
+    static String childId = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,7 @@ public class UserDetails extends AppCompatActivity {
 
             Log.d("MatTest", matrix[position][0]);
 
+            childId = matrix[position][0];
             idText.setText(matrix[position][0]);
             name.setText(matrix[position][1]);
             dateOfBirth.setText(matrix[position][2].split("T")[0]);
@@ -125,16 +128,25 @@ public class UserDetails extends AppCompatActivity {
 
     public void toEditHistorial(View view) throws JSONException {
         JSONObject UserInfo = null;
-        JSONObject answerJSON  = null;
-        UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
-        String answer = SaveSharedPreference.getUserData(this);
-        answerJSON = new JSONObject(answer);
+        JSONObject LoginData = null;
 
-//        UserInfo.getInt("uid");
+        String answer = SaveSharedPreference.getUserData(this);
+
+        JSONObject answerJSON = new JSONObject(answer);
+
+        UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+        LoginData = new JSONObject(answerJSON.getString("LoginData"));
+
+
+        LoginManager logManager = new LoginManager();
+        User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
+
+
+        //UserInfo.getInt("uid");
 
 
         Intent intent = new Intent(this, HistoricalResults.class);
-        intent.putExtra("jsonReceive",UserInfo.getInt("uid"));
+        intent.putExtra("studentId",childId);
         startActivity(intent);
 
 

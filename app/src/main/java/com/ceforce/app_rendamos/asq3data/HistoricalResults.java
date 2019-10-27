@@ -45,7 +45,41 @@ public class HistoricalResults extends AppCompatActivity {
         setContentView(R.layout.activity_historical_results);
         T=findViewById(R.id.table);
 
+        ArrayList<Integer> intList = new ArrayList<>();
+        LoginManager loginManager = new LoginManager();
+
+        JSONObject LoginData = null;
+        JSONObject UserInfo = null;
+        try {
+
+            Bundle bundle = getIntent().getExtras();
+
+            String studentId = (String) bundle.get("studentId");
+
+            String answer = SaveSharedPreference.getUserData(this);
+
+            JSONObject answerJSON = new JSONObject(answer);
+
+            UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+            LoginData = new JSONObject(answerJSON.getString("LoginData"));
+
+
+            LoginManager logManager = new LoginManager();
+            User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
+            intList = loginManager.getGlobalScores(teacher.getAccess_token(), studentId);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         puntajes=new int[5];
+
+        puntajes[0] = intList.get(0);
+        puntajes[1] = intList.get(1);
+        puntajes[2] = intList.get(2);
+        puntajes[3] = intList.get(3);
+        puntajes[4] = intList.get(4);
+
         createTable();
 
 
@@ -75,31 +109,8 @@ public class HistoricalResults extends AppCompatActivity {
 //            tr.addView(T3);
             tl.addView(tr);
 
-            LoginManager loginManager = new LoginManager();
-
-            JSONObject LoginData = null;
-            JSONObject UserInfo = null;
-            try {
-
-                getIntent().getIntExtra("jsonReceive",0);
-
-                String answer = SaveSharedPreference.getUserData(this);
-
-                JSONObject answerJSON = new JSONObject(answer);
-
-                UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
-                LoginData = new JSONObject(answerJSON.getString("LoginData"));
-
-
-                LoginManager logManager = new LoginManager();
-                User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
-                loginManager.getGlobalScores(teacher.getAccess_token(), "uid");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
-        }
+    }
 
 
 
