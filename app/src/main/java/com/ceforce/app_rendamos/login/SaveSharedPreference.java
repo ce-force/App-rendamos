@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import org.json.JSONObject;
+
 import java.net.PasswordAuthentication;
 
 public class SaveSharedPreference
@@ -11,6 +13,29 @@ public class SaveSharedPreference
     static final String DNI= "";
 
     static final String Password= "";
+
+    static final String userData = "";
+    static final String loginData = "";
+
+    public static String getUserData(Context ctx) {
+        return getSharedPreferences(ctx).getString(userData, "");
+    }
+
+    public static void setUserData(Context ctx, String newUserData) {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(userData, newUserData);
+        editor.commit();
+    }
+
+    public static String getLoginData(Context ctx) {
+        return getSharedPreferences(ctx).getString(loginData, "");
+    }
+
+    public static void setLoginData(Context ctx, String newLoginData) {
+        SharedPreferences.Editor editor = getSharedPreferences(ctx).edit();
+        editor.putString(loginData, newLoginData);
+        editor.commit();
+    }
 
     public static String getPassword(Context ctx) {
         return getSharedPreferences(ctx).getString(Password, "");

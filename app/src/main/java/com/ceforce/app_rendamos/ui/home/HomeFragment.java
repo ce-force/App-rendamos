@@ -18,7 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
+import com.ceforce.app_rendamos.login.LoginManager;
+import com.ceforce.app_rendamos.login.SaveSharedPreference;
+import com.ceforce.app_rendamos.user.User;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
@@ -32,18 +39,55 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
 
-//        final TextView textView = root.findViewById(R.id.text_home);
-////        homeViewModel.getText().observe(this, new Observer<String>() {
-////            @Override
-////            public void onChanged(@Nullable String s) {
-////                textView.setText(s);
-////            }
-////        });
+
+        JSONObject LoginData = null;
+        JSONObject UserInfo = null;
+        try {
+            LoginData = new JSONObject(SaveSharedPreference.getLoginData(getContext()));
+            UserInfo = new JSONObject(SaveSharedPreference.getUserData(getContext()));
+
+            //Log.d("AAAAA",  getArguments().getString("edttext"));
+
+            LoginManager logManager = new LoginManager();
+            User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
+
+            String[][] matrix = logManager.give_my_kids(teacher.getAccess_token());
+
+            if (matrix == null) {
+                Log.e("NO", "NO TIENE KIDS ESTE MEN");
+            } else {
+
+                for (int r = 0; r < matrix.length; r++) {
+                    Log.e("id", matrix[r][0]);
+                    Log.e("Nombre", matrix[r][1]);
+                    Log.e("dob", matrix[r][2]);
+                    Log.e("earlyBirht", matrix[r][3]);
+
+                }
+            }
+
+            matToRecyclerView(matrix, matrix.length, root);
+
+    //        final TextView textView = root.findViewById(R.id.text_home);
+    ////        homeViewModel.getText().observe(this, new Observer<String>() {
+    ////            @Override
+    ////            public void onChanged(@Nullable String s) {
+    ////                textView.setText(s);
+    ////            }
+    ////        });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return root;
     }
 
 
     private void matToRecyclerView(String mat[][], int n, View root){
+        Log.d("Login >> Mat Load", "initRecyclerView: init Mat Load");
 
         ArrayList<String> leftText = new ArrayList<>();
         ArrayList<String> rightText = new ArrayList<>();

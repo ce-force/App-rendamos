@@ -8,19 +8,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
-import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
-import com.ceforce.app_rendamos.User;
+import com.ceforce.app_rendamos.ui.home.HomeFragment;
+import com.ceforce.app_rendamos.user.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,20 +44,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) throws IOException, JSONException {
-        Log.d("NETXD2",""
-                +logManager.userRequest(id.getText().toString(), password.getText().toString())
-                +id.getText().toString()
-                +password.getText().toString());
+        Log.d("NETXD2", ""
+                + logManager.userRequest(id.getText().toString(), password.getText().toString())
+                + id.getText().toString()
+                + password.getText().toString());
         if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(this, "Por favor, llene todos los campos.", Toast.LENGTH_SHORT).show();
-        }
-        else if (false && id.getText().toString().length() == 9) {
+        } else if (false && id.getText().toString().length() == 9) {
             Toast.makeText(this, "Su id debe tener longitud igual a 9.", Toast.LENGTH_SHORT).show();
-        }
-        else if (password.getText().toString().length() < 8 || password.getText().toString().length() > 10) {
+        } else if (password.getText().toString().length() < 8 || password.getText().toString().length() > 10) {
             Toast.makeText(this, "Su constraseña debe tener mínimo mínimo 8 caracteres y máximo 10.", Toast.LENGTH_SHORT).show();
-        }
-        else if (!logManager.userRequest(id.getText().toString(), password.getText().toString())) {
+        } else if (!logManager.userRequest(id.getText().toString(), password.getText().toString())) {
             Toast.makeText(this, "Su DNI o contraseña son incorrectos", Toast.LENGTH_SHORT).show();
         } else {
             SaveSharedPreference.setPassword(this, password.getText().toString());
@@ -68,37 +62,30 @@ public class LoginActivity extends AppCompatActivity {
             Intent intSignUp = new Intent(LoginActivity.this, MainActivity.class);
 
 
-            JSONObject answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
-
-            JSONObject LoginData=new JSONObject(answer.getString("LoginData"));
-            JSONObject UserInfo=new JSONObject(answer.getString("UserInfo"));
-            teacher=new User(UserInfo.getInt("uid"),UserInfo.getString("givenName"),UserInfo.getString("email"),LoginData.getString("access_token"));
-            String[][] matrix=logManager.give_my_kids(teacher.access_token);
-            if(matrix==null){
-                Log.e("NO","NO TIENE KIDS ESTE MEN") ;
+            JSONObject answer = null;
+            try {
+                answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            else{
 
-                for(int r=0;r<matrix.length; r++) {
-                    Log.e("id",matrix[r][0]);
-                    Log.e("Nombre",matrix[r][1]);
-                    Log.e("dob",matrix[r][2]);
-                    Log.e("earlyBirht",matrix[r][3]);
-
-                }
+            Bundle bundle = new Bundle();
+            bundle.putString("edttext", answer.getString("UserInfo"));
+            // set Fragmentclass Arguments
+            HomeFragment fragobj = new HomeFragment();
+            fragobj.setArguments(bundle);
 
 
 
+            startActivity(intSignUp);
 
 
-                startActivity(intSignUp);
+            }
 
 
         }
 
 
-    }
-
-
 }
+
 

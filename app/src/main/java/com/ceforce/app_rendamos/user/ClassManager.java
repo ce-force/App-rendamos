@@ -1,4 +1,4 @@
-package com.ceforce.app_rendamos;
+package com.ceforce.app_rendamos.user;
 
 import android.util.Log;
 import android.view.textclassifier.TextLinks;
