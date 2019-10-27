@@ -19,12 +19,15 @@ import okhttp3.Response;
 
 public class LoginManager {
 
-    JSONObject answer = new JSONObject();
+
+    //JSONObject answer = new JSONObject();
     Boolean exists = false;
+    Boolean HaveKids=false;
 
     private static final String TAG = "Response";
     Button loadApi, postReq;
     private static final String[] respuesta = {""};
+    JSONObject answer;
     JSONArray answerRequest;
 
 
@@ -41,18 +44,23 @@ public class LoginManager {
         return answer;
     }
 
+
     public String [][] give_my_kids(String access_token) throws InterruptedException, JSONException, IOException {
         JSONArray kids=this.getHttpResponse("http://192.168.128.23:7321/ApiServer/api/Student/GetMyStudents",access_token);
-        String[][] matrix = new String[kids.length()][4];
-        Log.e("Size de kids",String.valueOf(kids.length()));
-        for(int r=0;r<kids.length(); r++) {
-            JSONObject kid=kids.getJSONObject(r);
-            matrix[r][0]= String.valueOf(kid.getInt("id"));
-            matrix[r][1]=kid.getString("firstName")+" "+ kid.getString("lastName");
-            matrix[r][2]=kid.getString("dob");
-            matrix[r][3]=kid.getString("earlyBirthAmount");
+        if(kids!=null){
+            String[][] matrix = new String[kids.length()][4];
+            Log.e("Size de kids",String.valueOf(kids.length()));
+            for(int r=0;r<kids.length(); r++) {
+                JSONObject kid=kids.getJSONObject(r);
+                matrix[r][0]= String.valueOf(kid.getInt("id"));
+                matrix[r][1]=kid.getString("firstName")+" "+ kid.getString("lastName");
+                matrix[r][2]=kid.getString("dob");
+                matrix[r][3]=kid.getString("earlyBirthAmount");
+            }
+            return matrix;
         }
-        return matrix;
+        else{return null;}
+
     }
 
     public JSONArray getHttpResponse(String urlEntry, String access_token ) throws IOException, InterruptedException, JSONException {
@@ -92,9 +100,18 @@ public class LoginManager {
             }
         });
         Thread.sleep(1000);
-        Log.e("RRRR",respuesta[0]);
-        answerRequest=new JSONArray(respuesta[0]);
-        return answerRequest;
+        if(respuesta[0]!=""){
+            Log.e("Si tiene kids",respuesta[0]);
+            answerRequest=new JSONArray(respuesta[0]);
+            return answerRequest;
+
+        }
+        else{
+            Log.e("No hay Kids","NO HAY");
+
+            return null;
+        }
+
     }
 
     public JSONObject post_Login(String user, String pass) throws IOException, InterruptedException {
@@ -166,6 +183,7 @@ public class LoginManager {
         return answer;
 
     }
+
 
     public boolean userRequest(String user, String pass) throws IOException {
 

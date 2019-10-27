@@ -14,6 +14,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceforce.app_rendamos.login.LoginActivity;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
@@ -114,4 +116,9 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
+
 }
