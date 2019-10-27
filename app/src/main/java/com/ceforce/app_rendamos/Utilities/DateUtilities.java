@@ -7,7 +7,6 @@ import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
 public class DateUtilities {
@@ -89,7 +88,167 @@ public class DateUtilities {
         return -1;
 
     }
-    
+
+    public String getASQ(String birthDate, int preWeeks) {
+
+
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        String today = df.format(c);
+
+        int dateDiff = dateDiff(birthDate, today) - preWeeks*7;
+
+        int ind = getInd(dateDiff);
+
+        switch (ind) {
+
+            case 0:
+                return "2 Meses ASQ-3";
+
+            case 1:
+                return "4 Meses ASQ-3";
+
+            case 2:
+                return "6 Meses ASQ-3";
+
+            case 3:
+                return "8 Meses ASQ-3";
+
+            case 4:
+                return "9 Meses ASQ-3";
+
+            case 5:
+                return "10 Meses ASQ-3";
+
+            case 6:
+                return "12 Meses ASQ-3";
+
+            case 7:
+                return "14 Meses ASQ-3";
+
+            case 8:
+                return "16 Meses ASQ-3";
+
+            case 9:
+                return "18 Meses ASQ-3";
+
+            case 10:
+                return "20 Meses ASQ-3";
+
+            case 11:
+                return "22 Meses ASQ-3";
+
+            case 12:
+                return "24 Meses ASQ-3";
+
+            case 13:
+                return "27 Meses ASQ-3";
+
+            case 14:
+                return "30 Meses ASQ-3";
+
+            case 15:
+                return "33 Meses ASQ-3";
+
+            case 16:
+                return "36 Meses ASQ-3";
+
+            case 17:
+                return "42 Meses ASQ-3";
+
+            case 18:
+                return "48 Meses ASQ-3";
+
+            case 19:
+                return "54 Meses ASQ-3";
+
+            case 20:
+                return "60 Meses ASQ-3";
+
+        }
+
+        return null;
+
+    }
+
+    public String getASQ(String birthDate, String applicationDate, int preWeeks) {
+
+
+        int dateDiff = dateDiff(birthDate, applicationDate) - preWeeks*7;
+
+        int ind = getInd(dateDiff);
+
+        switch (ind) {
+
+            case 0:
+                return "2 Meses ASQ-3";
+
+            case 1:
+                return "4 Meses ASQ-3";
+
+            case 2:
+                return "6 Meses ASQ-3";
+
+            case 3:
+                return "8 Meses ASQ-3";
+
+            case 4:
+                return "9 Meses ASQ-3";
+
+            case 5:
+                return "10 Meses ASQ-3";
+
+            case 6:
+                return "12 Meses ASQ-3";
+
+            case 7:
+                return "14 Meses ASQ-3";
+
+            case 8:
+                return "16 Meses ASQ-3";
+
+            case 9:
+                return "18 Meses ASQ-3";
+
+            case 10:
+                return "20 Meses ASQ-3";
+
+            case 11:
+                return "22 Meses ASQ-3";
+
+            case 12:
+                return "24 Meses ASQ-3";
+
+            case 13:
+                return "27 Meses ASQ-3";
+
+            case 14:
+                return "30 Meses ASQ-3";
+
+            case 15:
+                return "33 Meses ASQ-3";
+
+            case 16:
+                return "36 Meses ASQ-3";
+
+            case 17:
+                return "42 Meses ASQ-3";
+
+            case 18:
+                return "48 Meses ASQ-3";
+
+            case 19:
+                return "54 Meses ASQ-3";
+
+            case 20:
+                return "60 Meses ASQ-3";
+
+        }
+
+        return "No existe un ASQ que corresponda";
+
+    }
+
     public String getASQ(String birthDate) {
 
 
@@ -171,5 +330,85 @@ public class DateUtilities {
         return null;
 
     }
+
+    public String getASQ(String birthDate, String applicationDate) {
+
+
+        int dateDiff = dateDiff(birthDate, applicationDate);
+
+        int ind = getInd(dateDiff);
+
+        switch (ind) {
+
+            case 0:
+                return "2 Meses ASQ-3";
+
+            case 1:
+                return "4 Meses ASQ-3";
+
+            case 2:
+                return "6 Meses ASQ-3";
+
+            case 3:
+                return "8 Meses ASQ-3";
+
+            case 4:
+                return "9 Meses ASQ-3";
+
+            case 5:
+                return "10 Meses ASQ-3";
+
+            case 6:
+                return "12 Meses ASQ-3";
+
+            case 7:
+                return "14 Meses ASQ-3";
+
+            case 8:
+                return "16 Meses ASQ-3";
+
+            case 9:
+                return "18 Meses ASQ-3";
+
+            case 10:
+                return "20 Meses ASQ-3";
+
+            case 11:
+                return "22 Meses ASQ-3";
+
+            case 12:
+                return "24 Meses ASQ-3";
+
+            case 13:
+                return "27 Meses ASQ-3";
+
+            case 14:
+                return "30 Meses ASQ-3";
+
+            case 15:
+                return "33 Meses ASQ-3";
+
+            case 16:
+                return "36 Meses ASQ-3";
+
+            case 17:
+                return "42 Meses ASQ-3";
+
+            case 18:
+                return "48 Meses ASQ-3";
+
+            case 19:
+                return "54 Meses ASQ-3";
+
+            case 20:
+                return "60 Meses ASQ-3";
+
+        }
+
+        return "No existe un ASQ que corresponda";
+
+    }
+
+
 
 }
