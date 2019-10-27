@@ -2,6 +2,7 @@ package com.ceforce.app_rendamos.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -103,5 +104,10 @@ public class UserDetails extends AppCompatActivity {
         }
 
 
+    }
+
+    public void onApply(View view){
+        Intent i = new Intent(this, ASQ3TestActivity.class);
+        startActivity(i);
     }
 }

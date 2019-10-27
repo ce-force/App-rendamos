@@ -47,8 +47,8 @@ public class IntroActivity extends AppIntro {
         }
 
         addSlide(AppIntroFragment.newInstance("","Paso 1. Inicio de sesión",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("","Paso 2.",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
-        addSlide(AppIntroFragment.newInstance("","Paso 3",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance("","Paso 2. Seleccione un estudiante de la lista.",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
+        addSlide(AppIntroFragment.newInstance("","Paso 3. Realice el Test",R.drawable.logo03, ContextCompat.getColor(getApplicationContext(),R.color.colorPrimary)));
     }
 
     @Override
