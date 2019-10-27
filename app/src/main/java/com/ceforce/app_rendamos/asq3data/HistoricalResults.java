@@ -45,61 +45,38 @@ public class HistoricalResults extends AppCompatActivity {
         setContentView(R.layout.activity_historical_results);
         T=findViewById(R.id.table);
 
+
+
         puntajes=new int[5];
+
         createTable();
-
-
-
 
 
     }
 
-    public void createRows() {
-        TableLayout tl = (TableLayout) findViewById(R.id.table);
-        for (int i= 0;i<5;i++) {
-            TableRow tr = new TableRow(this);
-            TextView T1 = new TextView(this);
-            T1.setText(Areas[i]);
-            TextView T2 = new TextView(this);
-//            T2.setText(""+Limites[i]);
-//            TextView T3 = new TextView(this);
-//            T3.setText(""+array[i]);
-//            if (array[i]>Limites[i]){
-//                T3.setTextColor(Color.BLUE);
-//            }
-//            else{
-//                T3.setTextColor(Color.RED);
-//            }
-            tr.addView(T1);
-            tr.addView(T2);
-//            tr.addView(T3);
-            tl.addView(tr);
-
-            LoginManager loginManager = new LoginManager();
-
-            JSONObject LoginData = null;
-            JSONObject UserInfo = null;
-            try {
-
-                getIntent().getIntExtra("jsonReceive",0);
-
-                String answer = SaveSharedPreference.getUserData(this);
-
-                JSONObject answerJSON = new JSONObject(answer);
-
-                UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
-                LoginData = new JSONObject(answerJSON.getString("LoginData"));
-
-
-                LoginManager logManager = new LoginManager();
-                User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
-                loginManager.getGlobalScores(teacher.getAccess_token(), "uid");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        }
+//    public void createRows() {
+//        TableLayout tl = (TableLayout) findViewById(R.id.table);
+//        for (int i= 0;i<5;i++) {
+//            TableRow tr = new TableRow(this);
+//            TextView T1 = new TextView(this);
+//            T1.setText(Areas[i]);
+//            TextView T2 = new TextView(this);
+////            T2.setText(""+Limites[i]);
+////            TextView T3 = new TextView(this);
+////            T3.setText(""+array[i]);
+////            if (array[i]>Limites[i]){
+////                T3.setTextColor(Color.BLUE);
+////            }
+////            else{
+////                T3.setTextColor(Color.RED);
+////            }
+//            tr.addView(T1);
+//            tr.addView(T2);
+////            tr.addView(T3);
+//            tl.addView(tr);
+//
+//        }
+//    }
 
 
 
@@ -118,8 +95,34 @@ public class HistoricalResults extends AppCompatActivity {
             T2.setText(""+puntajes[i]);
             tr.addView(T2);
             T.addView(tr);
+
+            LoginManager loginManager = new LoginManager();
+
+            JSONObject LoginData = null;
+            JSONObject UserInfo = null;
+            try {
+
+//                getIntent().getIntExtra("jsonReceive",0);
+
+//                String answer = SaveSharedPreference.getUserData(this);
+
+//                JSONObject answerJSON = new JSONObject(answer);
+//
+//                UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+//                LoginData = new JSONObject(answerJSON.getString("LoginData"));
+                
+
+                LoginManager logManager = new LoginManager();
+                User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
+//                loginManager.getGlobalScores(teacher.getAccess_token(), "uid");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         }
     }
 
 
-}
+
