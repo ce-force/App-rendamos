@@ -1,4 +1,4 @@
-package com.ceforce.app_rendamos.RecyclerView;
+package com.ceforce.app_rendamos.asq3data;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,22 +8,22 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.ceforce.app_rendamos.R;
+import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class HistoryLog extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "HistoryLog";
 
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mImageUrls = new ArrayList<>();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_history_log);
         Log.d(TAG, "started: ok");
         initBitmaps();
     }
@@ -43,18 +43,15 @@ public class MainActivity extends AppCompatActivity {
 
         initRecyclerView();
 
-
         Log.d(TAG, "init bitmaps: done");
 
     }
 
     private void initRecyclerView(){
-
         Log.d(TAG, "initRecyclerView: init recyclerView");
         RecyclerView recyclerView = findViewById(R.id.recycler);
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, mNames, mImageUrls);
+        RecyclerViewAdapterUser adapter = new RecyclerViewAdapterUser(this, mNames, mImageUrls);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
-
 }

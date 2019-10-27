@@ -13,6 +13,8 @@ import com.ceforce.app_rendamos.ASQ3TestActivity;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.asq3data.HistoricalResults;
+import com.ceforce.app_rendamos.asq3data.HistoryLog;
 import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 
@@ -20,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -56,9 +59,9 @@ public class UserDetails extends AppCompatActivity {
 
             }
 
-            TextView idText = findViewById(R.id.userId);
-            TextView name = findViewById(R.id.name);
-            TextView dateOfBirth = findViewById(R.id.dateOfBirth);
+            TextView idText = findViewById(R.id.userName);
+            TextView name = findViewById(R.id.asq3Name);
+            TextView dateOfBirth = findViewById(R.id.asq3Birth);
             TextView premWeeks = findViewById(R.id.premWeeks);
             TextView examType = findViewById(R.id.examType);
             TextView examDate = findViewById(R.id.examDate);
@@ -80,7 +83,7 @@ public class UserDetails extends AppCompatActivity {
 
             examType.setText(exam);
 
-            Button button = findViewById(R.id.exButton);
+            Button button = findViewById(R.id.backButton);
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,12 +102,43 @@ public class UserDetails extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void onApply(View view){
-        Intent i = new Intent(this, ASQ3TestActivity.class);
-        startActivity(i);
+        Intent mIntent = new Intent(this, ASQ3TestActivity.class);
+        Bundle mBundle = new Bundle();
+        int[][] arr=new int[5][6];
+        arr[0][1]=5;
+        mBundle.putSerializable("matrix", arr);
+        mIntent.putExtras(mBundle);
+        startActivity(mIntent);
     }
+
+    public void toHistorial(View view){
+        Intent intent = new Intent(this, HistoryLog.class);
+        startActivity(intent);
+
+
+
+    }
+
+
+    public void toEditHistorial(View view) throws JSONException {
+        JSONObject UserInfo = null;
+        JSONObject answerJSON  = null;
+        UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+        String answer = SaveSharedPreference.getUserData(this);
+        answerJSON = new JSONObject(answer);
+
+//        UserInfo.getInt("uid");
+
+
+        Intent intent = new Intent(this, HistoricalResults.class);
+        intent.putExtra("jsonReceive",UserInfo.getInt("uid"));
+        startActivity(intent);
+
+
+
+    }
+
 }

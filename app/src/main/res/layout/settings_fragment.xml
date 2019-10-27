@@ -10,6 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
+        android:background="#09B6EB"
         android:onClick="onExit"
         android:text="LogOut"
         app:layout_constraintBottom_toBottomOf="parent"

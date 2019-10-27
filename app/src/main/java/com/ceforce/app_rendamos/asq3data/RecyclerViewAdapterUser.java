@@ -1,30 +1,23 @@
-package com.ceforce.app_rendamos.RecyclerView;
+package com.ceforce.app_rendamos.asq3data;
 
-import android.app.AppComponentFactory;
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
-import com.ceforce.app_rendamos.user.UserDetails;
+import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 
-
-public class RecyclerViewAdapter<TAG> extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class RecyclerViewAdapterUser<TAG> extends RecyclerView.Adapter<RecyclerViewAdapterUser.ViewHolder>{
 
 
     private static final Object TAG = "RecyclerViewAdapter";
@@ -39,7 +32,7 @@ public class RecyclerViewAdapter<TAG> extends RecyclerView.Adapter<RecyclerViewA
     private ViewHolder holder;
     private int position;
 
-    public RecyclerViewAdapter(Context mContext, ArrayList<String> leftText, ArrayList<String> rightText) {
+    public RecyclerViewAdapterUser(Context mContext, ArrayList<String> leftText, ArrayList<String> rightText) {
         this.leftText = leftText;
         this.rightText = rightText;
         this.mContext = mContext;
@@ -54,13 +47,14 @@ public class RecyclerViewAdapter<TAG> extends RecyclerView.Adapter<RecyclerViewA
         return viewHolder;
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         Log.d((String) TAG, "onBindViewHolder: called");
 
 
-        holder.leftText.setText(this.leftText.get(position));
-        holder.rightText.setText(this.rightText.get(position));
+//        holder.leftText.setText(this.leftText.get(position));
+//        holder.rightText.setText(this.rightText.get(position));
 
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,12 +62,10 @@ public class RecyclerViewAdapter<TAG> extends RecyclerView.Adapter<RecyclerViewA
 
                 ind = position;
 
-                Intent intent = new Intent(v.getContext(), UserDetails.class);
+                Intent intent = new Intent(v.getContext(), HistoricalResults.class);
                 v.getContext().startActivity(intent);
-
-
+                
                 Log.d("Ind", String.valueOf(position));
-
 
             }
         });

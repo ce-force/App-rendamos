@@ -1,8 +1,10 @@
 package com.ceforce.app_rendamos;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +13,12 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.asq3data.TestResults;
+import com.ceforce.app_rendamos.login.LoginActivity;
 import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.ui.DatePickerFragment;
@@ -49,6 +54,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
     };
     int AreaActual=0;
     int[][] punt = new int[5][6];
+    int[] Results;
 
 
 
@@ -119,6 +125,15 @@ public class ASQ3TestActivity extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Bundle b = this.getIntent().getExtras();
+        if(b!=null)
+            punt= (int[][]) b.getSerializable("matrix");
+            Log.d("STATUSXD1","LOOOOL");
+        show();
+        Refresh();
+
+
     }
 
     void show(){
@@ -126,6 +141,33 @@ public class ASQ3TestActivity extends AppCompatActivity {
             for (int j=0;j<6;j++){
                 Log.d("STATUSXD1",i+""+j+""+punt[i][j]);
             }
+        }
+    }
+
+    boolean AllSelected(){
+        for (int i=0;i<5;i++){
+            for (int j=0;j<6;j++){
+                if (punt[i][j]==-1){
+                    Toast.makeText(this,"Falta llenar el espacio "+(j+1)+" en el área de "+Areas[i],Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    void Results(){
+        Results=new int[5];
+        for (int i = 0;i < 5; i++){
+            int s=0;
+            for (int j = 0;j < 6; j++){
+                if (punt[i][j]!=-1) {
+                    s += punt[i][j];
+                }
+            }
+            Results[i]=s;
+            Log.d("Suma1",i+"-"+Results[i]);
         }
     }
 
@@ -171,6 +213,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
         show();
         AreaActual++;
         Refresh();
+        Results();
     }
 
     public void onBack(View view){
@@ -179,15 +222,57 @@ public class ASQ3TestActivity extends AppCompatActivity {
         show();
         AreaActual--;
         Refresh();
+        Results();
     }
 
     public void onConfirm(View view){
-        finish();
+        Select();
+        if (!AllSelected()){
+            return;
+        }
+
+        Results();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+// Add the buttons
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                Intent intent = new Intent(getBaseContext(), TestResults.class);
+                intent.putExtra("Results",Results);
+                startActivity(intent);
+                
+            }
+        });
+        builder.setMessage("Guardado con éxito")
+                .setTitle("");
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
+
     }
 
     public void onCancel(View view){
-        clean();
-        Refresh();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+// Add the buttons
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                clean();
+                Refresh();
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.setMessage("¿Seguro que desea salir sin guardar?")
+                .setTitle("Confirmar");
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
 
     }
 

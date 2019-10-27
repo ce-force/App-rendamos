@@ -45,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void validateInputFields(View view) throws IOException, JSONException {
-/*
+
         if (id.getText().toString().isEmpty() || password.getText().toString().isEmpty()) {
             Toast.makeText(this, "Por favor, llene todos los campos.", Toast.LENGTH_SHORT).show();
         } else if (false && id.getText().toString().length() == 9) {
@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
             JSONObject answer = null;
             try {
-                answer = logManager.post_Login(id.getText().toString(), password.getText().3toString());
+                answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
                 SaveSharedPreference.setUserData(this,answer.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -75,12 +75,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
             }
-*/
-        String access_token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlCQ0U2OTc1MDUzMkU3QjNEOUU3MkU4ODcwOTZENDk2RUEyNzdBOEIiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJtODVwZFFVeTU3UFo1eTZJY0piVWx1b25lb3MifQ.eyJuYmYiOjE1NzIyMDExMjQsImV4cCI6MTU3MjIwNDcyNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIvcmVzb3VyY2VzIiwiRGVodmlBUEkiXSwiY2xpZW50X2lkIjoiZGVodmlfYXBpIiwic3ViIjoiMSIsImF1dGhfdGltZSI6MTU3MjIwMTEyNCwiaWRwIjoibG9jYWwiLCJnaXZlbl9uYW1lIjoiWW9uYXRhbiBMZWl0b24iLCJlbWFpbCI6ImphcWxvdWkxQGdtYWlsLmNvbSIsInJvbGUiOiI1Iiwiem9uZWluZm8iOiIxIiwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlIiwiYXBpLnJlc291cmNlIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.JA5RyKidMZB9BC9ye-PLQJlZhJg_mNq0rGCg4gbqW2EKI39cvV5ep0EFxllQkvAMNp9vlSz76bRMJZkJqFtBLaucoBnq5vvejiBx3YFXyb4fIGVGIQ7Y2f7aiYen036hd7Bo1iPPeLr-fGwEu17VUJv2GVpdrgz8nsl1w7nx7PjEchEgrkq1Fdvh5FVtei-SGyBYwHakvwbN0ISkLBzZqpDdUVgdaZhBjimCMzLwLb4-ZqQ8i3S76z1oGtqbPtggUvuQ-uFo54VAKjBq2wtoETKHtPtMaCV8T5e6l6wBMA-8GQUxSljDG4n4-34uaghycbbHucqxPDbmOOIOPOTMug";
 
-        ArrayList<Integer> ints = new LoginManager().getGlobalScores(access_token, "11");
+//        String access_token = "eyJhbGciOiJSUzI1NiIsImtpZCI6IjlCQ0U2OTc1MDUzMkU3QjNEOUU3MkU4ODcwOTZENDk2RUEyNzdBOEIiLCJ0eXAiOiJKV1QiLCJ4NXQiOiJtODVwZFFVeTU3UFo1eTZJY0piVWx1b25lb3MifQ.eyJuYmYiOjE1NzIyMDExMjQsImV4cCI6MTU3MjIwNDcyNCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIiLCJhdWQiOlsiaHR0cDovL2xvY2FsaG9zdDo3MzIxL2F1dGhzZXJ2ZXIvcmVzb3VyY2VzIiwiRGVodmlBUEkiXSwiY2xpZW50X2lkIjoiZGVodmlfYXBpIiwic3ViIjoiMSIsImF1dGhfdGltZSI6MTU3MjIwMTEyNCwiaWRwIjoibG9jYWwiLCJnaXZlbl9uYW1lIjoiWW9uYXRhbiBMZWl0b24iLCJlbWFpbCI6ImphcWxvdWkxQGdtYWlsLmNvbSIsInJvbGUiOiI1Iiwiem9uZWluZm8iOiIxIiwic2NvcGUiOlsiZW1haWwiLCJvcGVuaWQiLCJyb2xlIiwiYXBpLnJlc291cmNlIiwib2ZmbGluZV9hY2Nlc3MiXSwiYW1yIjpbInB3ZCJdfQ.JA5RyKidMZB9BC9ye-PLQJlZhJg_mNq0rGCg4gbqW2EKI39cvV5ep0EFxllQkvAMNp9vlSz76bRMJZkJqFtBLaucoBnq5vvejiBx3YFXyb4fIGVGIQ7Y2f7aiYen036hd7Bo1iPPeLr-fGwEu17VUJv2GVpdrgz8nsl1w7nx7PjEchEgrkq1Fdvh5FVtei-SGyBYwHakvwbN0ISkLBzZqpDdUVgdaZhBjimCMzLwLb4-ZqQ8i3S76z1oGtqbPtggUvuQ-uFo54VAKjBq2wtoETKHtPtMaCV8T5e6l6wBMA-8GQUxSljDG4n4-34uaghycbbHucqxPDbmOOIOPOTMug";
+//
+//        ArrayList<Integer> ints = new LoginManager().getGlobalScores(access_token, "11");
 
-        Log.d("FINALVALUES", ints.toString());
+//        Log.d("FINALVALUES", ints.toString());
 
     }
 
