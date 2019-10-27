@@ -17,17 +17,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
+import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.login.SaveSharedPreference;
+import com.ceforce.app_rendamos.user.User;
 import com.ceforce.app_rendamos.user.UserDetails;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
+
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
     private static final String TAG = "RecyclerViewAdapter";
+    public static int ind = 0;
 
     private Context context;
 
@@ -62,10 +71,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             @Override
             public void onClick(View v) {
 
-//                context.startActivity(new Intent(context, UserDetails.class));
+                ind = position;
 
                 Intent intent = new Intent(v.getContext(), UserDetails.class);
                 v.getContext().startActivity(intent);
+
+
+                Log.d("Ind", String.valueOf(position));
 
 
             }

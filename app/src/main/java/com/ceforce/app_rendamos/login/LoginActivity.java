@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
             try {
                 answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
                 SaveSharedPreference.setUserData(this,answer.toString());
-                Log.d("ASDF", "1234");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

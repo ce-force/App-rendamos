@@ -45,8 +45,6 @@ public class HomeFragment extends Fragment {
         JSONObject UserInfo = null;
         try {
 
-            Log.d("AAAAA",  SaveSharedPreference.getUserData(getContext()));
-
             String answer = SaveSharedPreference.getUserData(getContext());
 
             JSONObject answerJSON = new JSONObject(answer);
