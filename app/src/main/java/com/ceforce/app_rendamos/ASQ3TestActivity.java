@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.ceforce.app_rendamos.ui.DatePickerFragment;
+
 public class ASQ3TestActivity extends AppCompatActivity {
     TextView tv1;
     TableLayout T;
@@ -19,6 +21,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
             "Resolución de problemas",
             "Socio-individual"
     };
+    int AreaActual=0;
 
 
     @Override
