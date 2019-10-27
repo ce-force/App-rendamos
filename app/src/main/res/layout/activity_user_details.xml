@@ -146,14 +146,6 @@
             android:textColor="@android:color/black"
             android:textSize="24sp" />
 
-        <Button
-            android:id="@+id/exButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ejecutar Prueba"
-
-            />
-
 
     </RelativeLayout>
 
@@ -164,6 +156,14 @@
         android:onClick="toHistorial"
 
         android:text="Ver Historial" />
+
+    <Button
+        android:id="@+id/exButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ejecutar Prueba"
+
+        />
 
 
 </LinearLayout>
