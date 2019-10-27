@@ -355,7 +355,7 @@ public class LoginManager {
     }
 
     public String [][] give_my_kids(String access_token) throws InterruptedException, JSONException, IOException {
-        JSONArray kids=this.getHttpResponse("http://192.168.128.23:8141/ApiServer/api/Student/GetMyStudents",access_token);
+        JSONArray kids=this.getHttpResponse("http://192.168.128.23:7321/ApiServer/api/Student/GetMyStudents",access_token);
         if(kids!=null){
             String[][] matrix = new String[kids.length()][4];
             Log.e("Size de kids",String.valueOf(kids.length()));

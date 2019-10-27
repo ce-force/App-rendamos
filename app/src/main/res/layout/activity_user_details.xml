@@ -159,7 +159,7 @@
             android:layout_height="wrap_content"
             android:background="#09B6EB"
 
-            android:onClick="toHistorial"
+            android:onClick="toEditHistorial"
             android:text="Ver Historial"
             android:textSize="10sp"
             android:textStyle="bold" />

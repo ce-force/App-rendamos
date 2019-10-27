@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -117,12 +118,27 @@ public class UserDetails extends AppCompatActivity {
         Intent intent = new Intent(this, HistoryLog.class);
         startActivity(intent);
 
+
+
     }
 
 
-    public void toEditHistorial(View view){
-//        Intent intent = new Intent(this, EditHistory.class);
-//        startActivity(intent);
+    public void toEditHistorial(View view) throws JSONException {
+        JSONObject UserInfo = null;
+        JSONObject answerJSON  = null;
+        UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+        String answer = SaveSharedPreference.getUserData(this);
+        answerJSON = new JSONObject(answer);
+
+//        UserInfo.getInt("uid");
+
+
+        Intent intent = new Intent(this, HistoricalResults.class);
+        intent.putExtra("jsonReceive",UserInfo.getInt("uid"));
+        startActivity(intent);
+
+
+
     }
 
 }
