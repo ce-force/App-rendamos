@@ -15,6 +15,7 @@ import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
 import com.ceforce.app_rendamos.asq3data.HistoricalResults;
 import com.ceforce.app_rendamos.asq3data.HistoryLog;
+import com.ceforce.app_rendamos.asq3data.consultresults.HistoryLog2;
 import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 
@@ -123,16 +124,9 @@ public class UserDetails extends AppCompatActivity {
 
 
     public void toEditHistorial(View view) throws JSONException {
-        JSONObject UserInfo = null;
-        JSONObject answerJSON  = null;
-        UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
-        String answer = SaveSharedPreference.getUserData(this);
-        answerJSON = new JSONObject(answer);
 
-//        UserInfo.getInt("uid");
-
-
-        Intent intent = new Intent(this, HistoricalResults.class);
+        Intent intent = new Intent(this, HistoryLog2.class);
+        intent.putExtra("ID",idText.getText());
 //        intent.putExtra("jsonReceive",UserInfo.getInt("uid"));
         startActivity(intent);
 

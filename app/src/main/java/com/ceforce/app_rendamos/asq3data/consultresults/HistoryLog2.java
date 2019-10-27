@@ -1,8 +1,6 @@
-package com.ceforce.app_rendamos.asq3data;
+package com.ceforce.app_rendamos.asq3data.consultresults;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 
 import com.ceforce.app_rendamos.ASQ3TestActivity;
 import com.ceforce.app_rendamos.R;
-import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 
@@ -26,7 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class HistoryLog extends AppCompatActivity {
+public class HistoryLog2 extends AppCompatActivity {
 
     private static final String TAG = "HistoryLog";
 
@@ -39,7 +36,7 @@ public class HistoryLog extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_history_log);
+        setContentView(R.layout.activity_history_log2);
         ID=getIntent().getStringExtra("ID");
 
         final ListView list = findViewById(R.id.list);
@@ -63,19 +60,6 @@ public class HistoryLog extends AppCompatActivity {
                 String clickedItem=(String) list.getItemAtPosition(position);
                 Toast.makeText(getBaseContext(),clickedItem,Toast.LENGTH_LONG).show();
                 Intent mIntent = new Intent(getBaseContext(), ASQ3TestActivity.class);
-                Bundle mBundle = new Bundle();
-                int[][] arr= new int[0][];
-                try {
-                    arr = Recopilar(position);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                mBundle.putSerializable("matrix", arr);
-                mIntent.putExtras(mBundle);
                 startActivity(mIntent);
             }
         });
@@ -108,8 +92,6 @@ public class HistoryLog extends AppCompatActivity {
         Log.d("NETXD2",tmp[j][1]);
 
         JSONArray result=new JSONArray(tmp[j][1]);
-
-
 
 //        for (int k = 0; k<5 ; k++){
 //            JSONArray hola= r;
