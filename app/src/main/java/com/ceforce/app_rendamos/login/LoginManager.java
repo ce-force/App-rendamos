@@ -34,20 +34,66 @@ public class LoginManager {
     JSONObject answer;
     JSONArray answerRequest;
     String answerTest;
+//
+//    public String[][] getAttendanceStudent(String access_token, String idStudent) throws InterruptedException, JSONException, IOException {
+//        JSONArray antendaces=this.getHttpResponse(" http://192.168.128.23:7321/ApiServer/api/Attendance/GetByStudentId?studentId="+idStudent,access_token);
+//        String[][] matrix = new String[antendaces.length()][2];
+//        for(int r=0;r<antendaces.length(); r++) {
+//            JSONObject antendance=antendaces.getJSONObject(r);
+//            matrix[r][0]= String.valueOf(antendance.getInt("id"));
+//            matrix[r][1]= String.valueOf(antendance.getInt("formId"));
+//        }
+//        return matrix;
+//
+//    }
 
-    public String[][] getAttendanceStudent(String access_token, String idStudent) throws InterruptedException, JSONException, IOException {
-        JSONArray antendaces=this.getHttpResponse(" http://192.168.128.23:7321/ApiServer/api/Attendance/GetByStudentId?studentId="+idStudent,access_token);
-        String[][] matrix = new String[antendaces.length()][2];
-        for(int r=0;r<antendaces.length(); r++) {
-            JSONObject antendance=antendaces.getJSONObject(r);
-            matrix[r][0]= String.valueOf(antendance.getInt("id"));
-            matrix[r][1]= String.valueOf(antendance.getInt("formId"));
-        }
-        return matrix;
+  /*
+  FUNCIONES DE SAHID
+   */
 
+
+
+  public String[][] getAttendanceStudent(String access_token, String idStudent) throws InterruptedException, JSONException, IOException {
+      JSONArray antendaces= getHttpResponse(" http://192.168.128.23:7321/ApiServer/api/Attendance/GetByStudentId?studentId="+idStudent,access_token);
+      String[][] matrix = new String[antendaces.length()][2];
+      String[][] respuesta=new String[antendaces.length()][2];
+      for(int r=0;r<antendaces.length(); r++) {
+          JSONObject antendance=antendaces.getJSONObject(r);
+          matrix[r][0]= String.valueOf(antendance.getInt("id"));
+          matrix[r][1]= String.valueOf(antendance.getInt("formId"));
+      }
+      for(int r=0;r<antendaces.length(); r++) {
+          respuesta[r][0]=this.getFormByid(access_token,matrix[r][0]);
+          respuesta[r][1]=this.getRsult(access_token,matrix[r][1]);
+
+      }
+
+//        ArrayList<Integer> Objetos=this.getASQResults(access_token,idStudent);
+//        ArrayList<JSONObject>Historico=this.getResultsFromAttendance(access_token,Objetos);
+
+      return respuesta;
+
+  }
+
+  public String getFormByid(String access_token,String formid) throws JSONException, IOException, InterruptedException {
+      String url="http://192.168.128.23:7321/ApiServer/api/Form/GetById?formHeaderId="+formid;
+      JSONObject prueba=  getHttpResponseObject(url,access_token);
+      Log.e("NOMBREPRUEBA",prueba.getString("name"));
+      return prueba.getString("name");
+
+  }
+    public String getRsult(String access_token,String id) throws JSONException, IOException, InterruptedException {
+        String url="http://192.168.128.23:7321/ApiServer/api/Result/GetResultByAttendanceId?attendanceId="+id;
+        JSONObject prueba=  getHttpResponseObject(url,access_token);
+        Log.e("RESULTSARRAY",prueba.toString());
+        return prueba.toString();
     }
 
 
+
+/*
+FIN DE LAS FUNCIONES
+ */
     public ArrayList<Integer> getASQResults(String access_token, String idStudent){
         ArrayList<Integer> indList = new ArrayList<>();
         try {

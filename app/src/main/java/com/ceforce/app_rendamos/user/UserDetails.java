@@ -28,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class UserDetails extends AppCompatActivity {
+    TextView idText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class UserDetails extends AppCompatActivity {
 
             }
 
-            TextView idText = findViewById(R.id.userName);
+            idText = findViewById(R.id.userName);
             TextView name = findViewById(R.id.asq3Name);
             TextView dateOfBirth = findViewById(R.id.asq3Birth);
             TextView premWeeks = findViewById(R.id.premWeeks);
@@ -116,6 +117,7 @@ public class UserDetails extends AppCompatActivity {
 
     public void toHistorial(View view){
         Intent intent = new Intent(this, HistoryLog.class);
+        intent.putExtra("ID",idText.getText());
         startActivity(intent);
 
 
