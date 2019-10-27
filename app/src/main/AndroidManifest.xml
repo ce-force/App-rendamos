@@ -16,7 +16,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".user.UserDetails"></activity>
+        <activity android:name=".ASQ3TestActivity"></activity>
+        <activity android:name=".user.UserDetails" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main2"
