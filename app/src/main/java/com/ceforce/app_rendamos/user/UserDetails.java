@@ -2,6 +2,7 @@ package com.ceforce.app_rendamos.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.asq3data.HistoricalResults;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 
 import org.json.JSONException;
@@ -56,9 +58,9 @@ public class UserDetails extends AppCompatActivity {
 
             }
 
-            TextView idText = findViewById(R.id.userId);
-            TextView name = findViewById(R.id.name);
-            TextView dateOfBirth = findViewById(R.id.dateOfBirth);
+            TextView idText = findViewById(R.id.userName);
+            TextView name = findViewById(R.id.asq3Name);
+            TextView dateOfBirth = findViewById(R.id.asq3Birth);
             TextView premWeeks = findViewById(R.id.premWeeks);
             TextView examType = findViewById(R.id.examType);
             TextView examDate = findViewById(R.id.examDate);
@@ -106,5 +108,10 @@ public class UserDetails extends AppCompatActivity {
     public void onApply(View view){
         Intent i = new Intent(this, ASQ3TestActivity.class);
         startActivity(i);
+    }
+
+    public void toHistorial(View view){
+        Intent intent = new Intent(this, HistoricalResults.class);
+        startActivity(intent);
     }
 }

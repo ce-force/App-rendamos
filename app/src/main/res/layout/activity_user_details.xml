@@ -28,7 +28,7 @@
         android:textAlignment="center"/>
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginTop="10dp"
@@ -36,8 +36,8 @@
         android:text="ID" />
 
     <TextView
-        android:id="@+id/userId"
-        android:layout_width="match_parent"
+        android:id="@+id/userName"
+        android:layout_width="255dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginRight="@dimen/text_margin"
@@ -47,7 +47,7 @@
         android:textSize="24sp" />
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginTop="10dp"
@@ -55,8 +55,8 @@
         android:text="Nombre" />
 
     <TextView
-        android:id="@+id/name"
-        android:layout_width="match_parent"
+        android:id="@+id/asq3Name"
+        android:layout_width="256dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
         android:layout_marginRight="@dimen/text_margin"
@@ -74,7 +74,7 @@
         android:text="Fecha de Nacimiento" />
 
     <TextView
-        android:id="@+id/dateOfBirth"
+        android:id="@+id/asq3Birth"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/text_margin"
@@ -150,14 +150,20 @@
             android:id="@+id/exButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/examDate"
             android:text="Ejecutar Prueba"
 
             />
 
 
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/exButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="toHistorial"
+
+        android:text="Ver Historial" />
 
 
 </LinearLayout>
