@@ -35,7 +35,7 @@ public class LoginManager {
 
         try {
             post_Login(user, pass);
-            Thread.sleep(1000);
+            Thread.sleep(500);
         }
         catch (Exception e){
 
@@ -99,7 +99,7 @@ public class LoginManager {
 
             }
         });
-        Thread.sleep(1000);
+        Thread.sleep(500);
         if(respuesta[0]!=""){
             Log.e("Si tiene kids",respuesta[0]);
             answerRequest=new JSONArray(respuesta[0]);
@@ -179,7 +179,7 @@ public class LoginManager {
 
             }
         });
-        Thread.sleep(1000);
+        Thread.sleep(500);
         return answer;
 
     }

@@ -1,5 +1,6 @@
 package com.ceforce.app_rendamos.RecyclerView;
 
+import android.app.AppComponentFactory;
 import android.content.Context;
 import android.media.Image;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ceforce.app_rendamos.R;
@@ -52,9 +54,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: clickedOn:" + leftText.get(position));
 
-                Toast.makeText(mContext, leftText.get(position), Toast.LENGTH_SHORT).show();
+                //setContentView(R.layout.settings_fragment);
+
+
             }
         });
     }

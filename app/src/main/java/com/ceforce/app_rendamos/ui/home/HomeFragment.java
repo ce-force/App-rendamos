@@ -16,9 +16,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
-import com.ceforce.app_rendamos.login.LoginManager;
+import com.ceforce.app_rendamos.Utilities.DateUtilities;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.user.User;
 
@@ -43,10 +44,16 @@ public class HomeFragment extends Fragment {
         JSONObject LoginData = null;
         JSONObject UserInfo = null;
         try {
-            LoginData = new JSONObject(SaveSharedPreference.getLoginData(getContext()));
-            UserInfo = new JSONObject(SaveSharedPreference.getUserData(getContext()));
 
-            //Log.d("AAAAA",  getArguments().getString("edttext"));
+            Log.d("AAAAA",  SaveSharedPreference.getUserData(getContext()));
+
+            String answer = SaveSharedPreference.getUserData(getContext());
+
+            JSONObject answerJSON = new JSONObject(answer);
+
+            UserInfo = new JSONObject(answerJSON.getString("UserInfo"));
+            LoginData = new JSONObject(answerJSON.getString("LoginData"));
+
 
             LoginManager logManager = new LoginManager();
             User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
@@ -61,7 +68,7 @@ public class HomeFragment extends Fragment {
                     Log.e("id", matrix[r][0]);
                     Log.e("Nombre", matrix[r][1]);
                     Log.e("dob", matrix[r][2]);
-                    Log.e("earlyBirht", matrix[r][3]);
+                    Log.e("earlyBirth", matrix[r][3]);
 
                 }
             }
@@ -75,11 +82,9 @@ public class HomeFragment extends Fragment {
     ////                textView.setText(s);
     ////            }
     ////        });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
+            Log.d("AAAAA",  e.getMessage());
+
             e.printStackTrace();
         }
         return root;
@@ -94,8 +99,13 @@ public class HomeFragment extends Fragment {
 
         for (int i = 0; i < n; i++) {
 
-            leftText.add(mat[i][0]);
-            rightText.add(mat[i][1]);
+            leftText.add(mat[i][1]);
+
+            DateUtilities dateUtilities = new DateUtilities();
+
+            String ASQ = dateUtilities.getASQ(mat[i][2], Integer.parseInt(mat[i][3]));
+
+            rightText.add(ASQ);
 
         }
 

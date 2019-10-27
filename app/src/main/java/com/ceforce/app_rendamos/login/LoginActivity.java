@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.ui.home.HomeFragment;
@@ -65,15 +66,12 @@ public class LoginActivity extends AppCompatActivity {
             JSONObject answer = null;
             try {
                 answer = logManager.post_Login(id.getText().toString(), password.getText().toString());
+                SaveSharedPreference.setUserData(this,answer.toString());
+                Log.d("ASDF", "1234");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            Bundle bundle = new Bundle();
-            bundle.putString("edttext", answer.getString("UserInfo"));
-            // set Fragmentclass Arguments
-            HomeFragment fragobj = new HomeFragment();
-            fragobj.setArguments(bundle);
 
 
 
