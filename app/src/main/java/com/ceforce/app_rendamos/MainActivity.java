@@ -92,22 +92,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public boolean userRequest(String user, String pass) throws IOException {
-
-        answer = logManager.getUserData(user, pass);
-
-        if (answer != null){
-
-            return true;
-
-        }
-        else
-        {
-
-            return false;
-
-        }
 
 
-    }
 }

@@ -19,6 +19,8 @@ import okhttp3.Response;
 
 public class LoginManager {
 
+    JSONObject answer = new JSONObject();
+    Boolean exists = false;
 
     private static final String TAG = "Response";
     Button loadApi, postReq;
@@ -34,8 +36,6 @@ public class LoginManager {
             Thread.sleep(1000);
         }
         catch (Exception e){
-
-            //pass
 
         }
 
@@ -124,7 +124,7 @@ public class LoginManager {
 
         OkHttpClient client = new OkHttpClient();
 
-        final JSONObject postdata = new JSONObject();
+        JSONObject postdata = new JSONObject();
         try {
             postdata.put("username", user);
             postdata.put("password", pass);
@@ -146,7 +146,7 @@ public class LoginManager {
             @Override
             public void onFailure(Call call, IOException e) {
                 String mMessage = e.getMessage().toString();
-                answer = null;
+                exists = false;
                 Log.w("Failure Response", mMessage);
             }
 
@@ -155,10 +155,11 @@ public class LoginManager {
                 String mMessage = response.body().string();
                 try {
                     answer = new JSONObject(mMessage);
+                    exists = true;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                Log.e("Success! Response: ", answer.toString());
+                Log.e("Exists! Response ", exists.toString());
 
             }
         });
@@ -167,5 +168,12 @@ public class LoginManager {
 
     }
 
+    public boolean userRequest(String user, String pass) throws IOException {
+
+        this.getUserData(user,pass);
+
+        return exists;
+
+    }
 
 }
