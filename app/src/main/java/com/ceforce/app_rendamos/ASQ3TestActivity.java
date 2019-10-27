@@ -17,8 +17,8 @@ import android.widget.Toast;
 
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
-import com.ceforce.app_rendamos.asq3data.TestResults;
 import com.ceforce.app_rendamos.login.LoginActivity;
+import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.ui.DatePickerFragment;
 import com.ceforce.app_rendamos.user.User;
@@ -76,7 +76,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
             LoginData = new JSONObject(answerJSON.getString("LoginData"));
 
 
-            com.ceforce.app_rendamos.LoginManager logManager = new com.ceforce.app_rendamos.LoginManager();
+            LoginManager logManager = new LoginManager();
             User teacher = new User(UserInfo.getInt("uid"), UserInfo.getString("givenName"), UserInfo.getString("email"), LoginData.getString("access_token"));
 
             String[][] matrix = logManager.give_my_kids(teacher.getAccess_token());

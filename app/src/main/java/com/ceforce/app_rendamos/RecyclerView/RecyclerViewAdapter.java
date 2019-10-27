@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.ceforce.app_rendamos.MainActivity;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.user.UserDetails;
 

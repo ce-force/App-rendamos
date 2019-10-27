@@ -10,12 +10,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.ceforce.app_rendamos.ASQ3TestActivity;
-import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
 import com.ceforce.app_rendamos.asq3data.HistoricalResults;
 import com.ceforce.app_rendamos.asq3data.HistoryLog;
+import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 
 import org.json.JSONException;
