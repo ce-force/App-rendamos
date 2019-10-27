@@ -1,8 +1,10 @@
 package com.ceforce.app_rendamos;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.login.LoginActivity;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.ui.DatePickerFragment;
 import com.ceforce.app_rendamos.user.User;
@@ -181,12 +184,44 @@ public class ASQ3TestActivity extends AppCompatActivity {
     }
 
     public void onConfirm(View view){
-        finish();
+        clean();
+        Refresh();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+// Add the buttons
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                
+            }
+        });
+        builder.setMessage("Guardado con éxito")
+                .setTitle("");
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
     }
 
     public void onCancel(View view){
         clean();
         Refresh();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+// Add the buttons
+        builder.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                finish();
+            }
+        });
+        builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                // User cancelled the dialog
+            }
+        });
+        builder.setMessage("¿Seguro que desea salir sin guardar?")
+                .setTitle("Confirmar");
+
+        AlertDialog dialog = builder.create();
+
+        dialog.show();
 
     }
 
