@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.asq3data.TestResults;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.ui.DatePickerFragment;
 import com.ceforce.app_rendamos.user.User;
@@ -73,13 +74,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
             }
         }
         Refresh();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
     }
 
     void show() {
