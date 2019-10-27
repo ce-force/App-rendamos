@@ -39,7 +39,11 @@ public class HistoricalResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historical_results);
         T=findViewById(R.id.table);
+
+        puntajes = new int[5][6];
         createTable();
+
+
 
 
     }

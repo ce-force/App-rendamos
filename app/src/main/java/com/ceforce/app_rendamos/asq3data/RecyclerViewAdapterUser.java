@@ -64,10 +64,8 @@ public class RecyclerViewAdapterUser<TAG> extends RecyclerView.Adapter<RecyclerV
 
                 Intent intent = new Intent(v.getContext(), HistoricalResults.class);
                 v.getContext().startActivity(intent);
-
-
+                
                 Log.d("Ind", String.valueOf(position));
-
 
             }
         });

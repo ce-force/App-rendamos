@@ -13,8 +13,9 @@
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="toUserHistory"
+        android:background="#09B6EB"
 
+        android:onClick="toUserHistory"
         android:text="Atrás" />
 
     <ScrollView

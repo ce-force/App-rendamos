@@ -112,7 +112,12 @@ public class UserDetails extends AppCompatActivity {
         Intent intent = new Intent(this, HistoryLog.class);
         startActivity(intent);
 
-
-
     }
+
+
+    public void toEditHistorial(View view){
+//        Intent intent = new Intent(this, EditHistory.class);
+//        startActivity(intent);
+    }
+
 }
