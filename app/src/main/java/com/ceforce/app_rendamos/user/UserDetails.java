@@ -2,7 +2,6 @@ package com.ceforce.app_rendamos.user;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +15,7 @@ import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
 import com.ceforce.app_rendamos.asq3data.HistoricalResults;
+import com.ceforce.app_rendamos.asq3data.HistoryLog;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 
 import org.json.JSONException;
@@ -82,7 +82,7 @@ public class UserDetails extends AppCompatActivity {
 
             examType.setText(exam);
 
-            Button button = findViewById(R.id.exButton);
+            Button button = findViewById(R.id.backButton);
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -101,8 +101,6 @@ public class UserDetails extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void onApply(View view){
@@ -111,7 +109,10 @@ public class UserDetails extends AppCompatActivity {
     }
 
     public void toHistorial(View view){
-        Intent intent = new Intent(this, HistoricalResults.class);
+        Intent intent = new Intent(this, HistoryLog.class);
         startActivity(intent);
+
+
+
     }
 }

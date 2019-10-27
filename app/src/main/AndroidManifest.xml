@@ -16,7 +16,8 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".asq3data.HistoricalResults"></activity>
+        <activity android:name=".asq3data.HistoryLog"></activity>
+        <activity android:name=".asq3data.HistoricalResults" />
         <activity android:name=".asq3data.TestResults" />
         <activity android:name=".ASQ3TestActivity" />
         <activity android:name=".user.UserDetails" />

@@ -9,15 +9,13 @@
     tools:context=".asq3data.HistoricalResults">
 
 
-
-
     <Button
-        android:id="@+id/exButton"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Atrás"
+        android:onClick="toUserHistory"
 
-        />
+        android:text="Atrás" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,8 +40,8 @@
                 android:layout_marginLeft="@dimen/text_margin"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="@dimen/text_margin"
-                android:text="Ciclo de desarrollo integral"
-                android:textAlignment="center"/>
+                android:text="Resultados Históricos."
+                android:textAlignment="center" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -101,6 +99,13 @@
                 android:text="@string/sample_string"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="seeLogHistory"
+                android:text="Ver ASQ-3." />
 
             <RelativeLayout
                 android:layout_width="395dp"
