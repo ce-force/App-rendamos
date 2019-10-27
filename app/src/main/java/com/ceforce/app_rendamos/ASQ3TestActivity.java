@@ -132,6 +132,21 @@ public class ASQ3TestActivity extends AppCompatActivity {
         }
     }
 
+    int[] Results(){
+        int arr[]=new int[5];
+        for (int i = 0;i < 5; i++){
+            int s=0;
+            for (int j = 0;j < 6; j++){
+                if (punt[i][j]!=-1) {
+                    s += punt[i][j];
+                }
+            }
+            arr[i]=s;
+        }
+
+        return arr;
+    }
+
     void clean() {
         for (int i=0;i<5;i++){
             for (int j=0;j<6;j++){
@@ -193,6 +208,7 @@ public class ASQ3TestActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
 
                 Intent intent = new Intent(getBaseContext(), TestResults.class);
+                intent.putExtra("Results",Results());
                 startActivity(intent);
                 
             }
