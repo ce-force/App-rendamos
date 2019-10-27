@@ -104,8 +104,13 @@ public class UserDetails extends AppCompatActivity {
     }
 
     public void onApply(View view){
-        Intent i = new Intent(this, ASQ3TestActivity.class);
-        startActivity(i);
+        Intent mIntent = new Intent(this, ASQ3TestActivity.class);
+        Bundle mBundle = new Bundle();
+        int[][] arr=new int[5][6];
+        arr[0][1]=5;
+        mBundle.putSerializable("matrix", arr);
+        mIntent.putExtras(mBundle);
+        startActivity(mIntent);
     }
 
     public void toHistorial(View view){
