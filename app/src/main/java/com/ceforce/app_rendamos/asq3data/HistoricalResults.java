@@ -24,7 +24,7 @@ import java.util.ArrayList;
 
 public class HistoricalResults extends AppCompatActivity {
     TableLayout T;
-    int[][] puntajes;
+    int[] puntajes;
     String[] Areas={
             "Comunicación",
             "Motora Fina",
@@ -39,6 +39,7 @@ public class HistoricalResults extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historical_results);
         T=findViewById(R.id.table);
+        puntajes=new int[5];
         createTable();
 
 
@@ -56,16 +57,9 @@ public class HistoricalResults extends AppCompatActivity {
             TextView T1=new TextView(this);
             T1.setText(Areas[i]);
             tr.addView(T1);
-            int s=0;
-            for (int j = 1;j<7;j++){
-                TextView T2=new TextView(this);
-                T2.setText(""+puntajes[i][j-1]);
-                s+=puntajes[i][j-1];
-                tr.addView(T2);
-            }
-            TextView T3=new TextView(this);
-            T3.setText(""+s);
-            tr.addView(T3);
+            TextView T2=new TextView(this);
+            T2.setText(""+puntajes[i]);
+            tr.addView(T2);
             T.addView(tr);
         }
     }
