@@ -12,8 +12,20 @@ import android.widget.RadioGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.ceforce.app_rendamos.asq3data.TestResults;
+import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
+import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.ui.DatePickerFragment;
+import com.ceforce.app_rendamos.user.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Text;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class ASQ3TestActivity extends AppCompatActivity {
     TextView tv1;
@@ -44,15 +56,15 @@ public class ASQ3TestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_asq3_test);
 
-        tv1 = findViewById(R.id.textView);
-        area = findViewById(R.id.Area);
-        T = findViewById(R.id.table);
-        R1 = findViewById(R.id.Rgroup1);
-        R2 = findViewById(R.id.Rgroup2);
-        R3 = findViewById(R.id.Rgroup3);
-        R4 = findViewById(R.id.Rgroup4);
-        R5 = findViewById(R.id.Rgroup5);
-        R6 = findViewById(R.id.Rgroup6);
+        tv1=findViewById(R.id.textView);
+        area=findViewById(R.id.Area);
+        T=findViewById(R.id.table);
+        R1=findViewById(R.id.Rgroup1);
+        R2=findViewById(R.id.Rgroup2);
+        R3=findViewById(R.id.Rgroup3);
+        R4=findViewById(R.id.Rgroup4);
+        R5=findViewById(R.id.Rgroup5);
+        R6=findViewById(R.id.Rgroup6);
 
 
         for (int i = 0; i < 5; i++) {
@@ -61,6 +73,13 @@ public class ASQ3TestActivity extends AppCompatActivity {
             }
         }
         Refresh();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void show() {

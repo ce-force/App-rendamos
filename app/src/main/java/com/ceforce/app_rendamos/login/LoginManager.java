@@ -8,6 +8,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.StringJoiner;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -18,8 +23,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginManager {
-
-
     //JSONObject answer = new JSONObject();
     Boolean exists = false;
     Boolean HaveKids=false;
@@ -29,7 +32,6 @@ public class LoginManager {
     private static final String[] respuesta = {""};
     JSONObject answer;
     JSONArray answerRequest;
-
 
     public JSONObject getUserData(String user, String pass){
 
@@ -44,6 +46,96 @@ public class LoginManager {
         return answer;
     }
 
+    public static String join(String [] list, String delim) {
+
+        StringBuilder sb = new StringBuilder();
+
+        String loopDelim = "";
+
+        for (int i = 0; i < list.length; i++) {
+
+            sb.append(loopDelim);
+            sb.append(list[i]);
+
+            loopDelim = delim;
+        }
+
+        return sb.toString();
+    }
+
+    public int getId(String access_token) throws InterruptedException, JSONException, IOException {
+        JSONArray antendaces=this.getHttpResponse("http://192.168.128.23:7321/ApiServer/api/Attendance/GetAllAttendances",access_token);
+        if(antendaces==null){
+            Log.e("NO ID ULTIMO","no hay");
+            return 0;
+
+
+        }
+        else{
+            JSONObject ultimo=antendaces.getJSONObject(antendaces.length()-1);
+            return  1+ Integer.parseInt(ultimo.getString("id"));
+        }
+    }
+
+    public JSONObject postAttendance(String access_token, String formName, int studentId, int appId){
+        try {
+
+            String form  = getFormFromName(access_token, formName);
+
+            JSONObject formObject = new JSONObject(form);
+
+            JSONObject attendance = new JSONObject();
+
+            int id = getId(access_token);
+
+            attendance.put("id", id);
+
+            Date c = Calendar.getInstance().getTime();
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSz");
+            String today = df.format(c);
+
+            attendance.put("date", today);
+
+            attendance.put("formId", formObject.get("id"));
+
+            attendance.put("studentId", studentId);
+            attendance.put("applicatorId", appId);
+
+            attendance.put("status", "Finished");
+            attendance.put("form", formObject);
+
+            return attendance;
+        }
+        catch (Exception e){
+
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getFormFromName(String access_token, String name){
+
+
+        String exten = join(name.split(" "), "%20");
+
+
+        String url = "http://192.168.128.23:7321/ApiServer/api/Form/GetByName?formHeaderName="+ exten;
+
+        try {
+
+            JSONObject form = getHttpResponseObject(url, access_token);
+
+            return form.toString();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public String [][] give_my_kids(String access_token) throws InterruptedException, JSONException, IOException {
         JSONArray kids=this.getHttpResponse("http://192.168.128.23:7321/ApiServer/api/Student/GetMyStudents",access_token);
@@ -63,7 +155,7 @@ public class LoginManager {
 
     }
 
-    public JSONArray getHttpResponse(String urlEntry, String access_token ) throws IOException, InterruptedException, JSONException {
+    public JSONArray getHttpResponse(String urlEntry, String access_token) throws IOException, InterruptedException, JSONException {
 
 
         String url = urlEntry;
@@ -104,6 +196,53 @@ public class LoginManager {
             Log.e("Si tiene kids",respuesta[0]);
             answerRequest=new JSONArray(respuesta[0]);
             return answerRequest;
+
+        }
+        else{
+            Log.e("No hay Kids","NO HAY");
+
+            return null;
+        }
+
+    }
+
+    public JSONObject getHttpResponseObject(String urlEntry, String access_token) throws IOException, InterruptedException, JSONException {
+
+        String url = urlEntry;
+
+        OkHttpClient client = new OkHttpClient();
+
+        final Request request = new Request.Builder()
+                .url(url)
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .header("Authorization","Bearer "+access_token)
+                .build();
+
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                String mMessage = e.getMessage().toString();
+                Log.w("failure Response", mMessage);
+                //call.cancel();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                String mMessage = response.body().string();
+                try {
+                    answer = new JSONObject(mMessage);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        Thread.sleep(500);
+        if(answer != null){
+            return answer;
 
         }
         else{
@@ -183,7 +322,6 @@ public class LoginManager {
         return answer;
 
     }
-
 
     public boolean userRequest(String user, String pass) throws IOException {
 
