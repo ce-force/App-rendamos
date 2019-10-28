@@ -16,10 +16,10 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.ceforce.app_rendamos.LoginManager;
 import com.ceforce.app_rendamos.R;
 import com.ceforce.app_rendamos.RecyclerView.RecyclerViewAdapter;
 import com.ceforce.app_rendamos.Utilities.DateUtilities;
+import com.ceforce.app_rendamos.login.LoginManager;
 import com.ceforce.app_rendamos.login.SaveSharedPreference;
 import com.ceforce.app_rendamos.user.User;
 
@@ -39,13 +39,9 @@ public class HomeFragment extends Fragment {
                 ViewModelProviders.of(this).get(HomeViewModel.class);
         View root = inflater.inflate(R.layout.fragment_home, container, false);
 
-
-
         JSONObject LoginData = null;
         JSONObject UserInfo = null;
         try {
-
-            Log.d("AAAAA",  SaveSharedPreference.getUserData(getContext()));
 
             String answer = SaveSharedPreference.getUserData(getContext());
 
